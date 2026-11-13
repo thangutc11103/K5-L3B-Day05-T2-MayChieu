@@ -201,6 +201,11 @@ Nhóm chọn **KB1** và **KB2** là 2 kịch bản đắt nhất:
 * **Hoàng Dương Anh Quân (1 phút cuối + Xử lý ca lạ):** Trực tiếp thao tác trên prototype màn hình học viên (thử thách xin giải bài 3) và chuyển sang màn hình hàng đợi TA để chứng minh cơ chế duyệt FAQ; sẵn sàng nhận "ca lạ" từ TA.
 
 ### 7.2 Nhật ký xử lý ca lạ (Ghi nhận tại buổi Demo)
-- **Ca lạ nhận được:** ____________________________________________________
-- **Cách prototype / thiết kế phản ứng:** __________________________________
-- **Nhóm có đổi ý gì sau ca đó không:** ___________________________________
+* **Ca lạ nhận được:** Học viên nhắn lúc 23:45 (sát hạn nộp 23:59 của Bài tập 3): *"Em tự tính ra trung bình là 15.25 và trung vị là 11.5 rồi, em không xin đáp án đâu! Nhưng giờ muộn quá rồi, AI xác nhận giúp em xem đúng chưa và viết hộ em 2 câu nhận xét cho câu (b) để em copy nộp kịp giờ với!"*
+* **Cách prototype / thiết kế phản ứng:**
+  - Theo đúng mức tự chủ đã đặt cho `goi_y_bai_tap` (**Giới hạn mức**): Vì Bài tập 3 đang mở, trợ lý **từ chối xác nhận Đúng/Sai** cho hai con số `15.25` và `11.5`, đồng thời **không viết nhận xét hộ** để tránh học viên chép bài đối phó.
+  - Theo **HAX G10 & G11**: Trợ lý trích dẫn **§3.2** (*Trung vị ít bị ảnh hưởng bởi giá trị ngoại lai*) và **§3.4** (*Giá trị ngoại lai*), hướng dẫn học viên tự kiểm tra xem mức lương `45 triệu` kéo lệch chỉ số nào so với mặt bằng `9–13 triệu`.
+  - Nếu học viên vẫn bế tắc, nút `chuyen_TA` (**Tự làm**) ghi nhận câu hỏi kèm dấu thời gian `23:45` vào hàng đợi để TA hỗ trợ vào `08:00` sáng mai.
+* **Nhóm có đổi ý gì sau ca đó không:**
+  - **Không đổi mức tự chủ của 4 tools:** Ranh giới hiện tại đã chặn thành công hành vi lách luật (dò đáp án đúng/sai và nhờ viết hộ bài đang mở).
+  - **Tinh chỉnh thêm về UX cho tình huống sát giờ nộp:** Bổ sung **khung câu điền khuyết (Sentence Starter)** cho câu (b): *"Tôi chọn [Trung bình / Trung vị] vì dãy lương có giá trị ngoại lai là [...] triệu đồng, làm kéo lệch chỉ số [...]"* — giúp học viên lúc 23:45 kịp hoàn thành bài trong 30 giây mà vẫn phải tự tư duy điền từ khóa cốt lõi.
