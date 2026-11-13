@@ -60,7 +60,7 @@
     .annotation-toggle { display:flex; align-items:center; gap:8px; font-size:12px; color:var(--mut); cursor:pointer; min-height:30px; }
     input[type="checkbox"] { accent-color:var(--pri); width:16px; height:16px; }
     .scenario-options { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:10px; }
-    .scenario-btn { display:flex; align-items:center; gap:10px; text-align:left; border:1px solid var(--line); background:var(--card); color:var(--ink); border-radius:12px; padding:13px; min-height:76px; }
+    .scenario-btn { display:flex; align-items:center; gap:10px; min-width:0; overflow-wrap:anywhere; text-align:left; border:1px solid var(--line); background:var(--card); color:var(--ink); border-radius:12px; padding:13px; min-height:76px; }
     .scenario-btn:hover { border-color:var(--pri); background:var(--prib); }
     .scenario-number { display:grid; place-items:center; width:30px; height:30px; flex:none; border-radius:9px; background:var(--surface); font-size:12px; color:var(--mut); font-weight:700; }
     .scenario-btn strong { display:block; font-size:13px; font-weight:650; }
@@ -139,16 +139,20 @@
     <div class="header-actions"><span class="badge">LAB5 · MayChieu · L3B</span><button id="themeToggle" class="theme-toggle" type="button" onclick="toggleTheme()" aria-label="Chuyển sang chế độ tối" aria-pressed="false"><span class="theme-icon" aria-hidden="true">☾</span><span id="themeLabel">Chế độ tối</span></button></div>
   </div>
 
-  <div class="scenario-bar">
-    <span>Chọn ca để trải nghiệm & Demo:</span>
-    <button class="scenario-btn active" data-sc="sc1" onclick="loadScenario('sc1', this)">Ca 1 (Khó nhất): Xin giải hộ Bài 3 đang mở · Socratic</button>
-    <button class="scenario-btn" data-sc="sc2" onclick="loadScenario('sc2', this)">Ca 2: Tài liệu §3.3 bị sai toán · Góp ý Giảng viên</button>
-    <button class="scenario-btn" data-sc="sc3" onclick="loadScenario('sc3', this)">Ca 3: Hỏi p-value ở Slide 12 · Ngoài phạm vi Buổi 3</button>
-    <button class="scenario-btn" data-sc="sc4" onclick="loadScenario('sc4', this)">Bonus: Màn hình kiểm duyệt FAQ của TA</button>
-    <label style="margin-left:auto; font-size:13px; cursor:pointer;">
-      <input type="checkbox" id="toggleHax" checked onchange="toggleAnnotations()"> Hiện số chú thích HAX/PAIR
-    </label>
-  </div>
+  <nav class="scenario-bar" aria-label="Chọn ca trải nghiệm">
+    <div class="scenario-heading">
+      <span class="scenario-label">Chọn ca để trải nghiệm &amp; Demo:</span>
+      <label class="annotation-toggle">
+        <input type="checkbox" id="toggleHax" checked onchange="toggleAnnotations()"> Hiện số chú thích HAX/PAIR
+      </label>
+    </div>
+    <div class="scenario-options">
+      <button class="scenario-btn active" data-sc="sc1" aria-pressed="true" onclick="loadScenario('sc1', this)">Ca 1 (Khó nhất): Xin giải hộ Bài 3 đang mở · Socratic</button>
+      <button class="scenario-btn" data-sc="sc2" aria-pressed="false" onclick="loadScenario('sc2', this)">Ca 2: Tài liệu §3.3 bị sai toán · Góp ý Giảng viên</button>
+      <button class="scenario-btn" data-sc="sc3" aria-pressed="false" onclick="loadScenario('sc3', this)">Ca 3: Hỏi p-value ở Slide 12 · Ngoài phạm vi Buổi 3</button>
+      <button class="scenario-btn" data-sc="sc4" aria-pressed="false" onclick="loadScenario('sc4', this)">Bonus: Màn hình kiểm duyệt FAQ của TA</button>
+    </div>
+  </nav>
 </header>
 
 <main id="mainContainer">
