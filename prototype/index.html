@@ -4,352 +4,180 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>LAB5 · T2 Giáo dục · Nhóm MayChieu · Prototype Trợ lý Study Mode</title>
+  <meta name="color-scheme" content="light dark">
+  <script>
+    (() => {
+      let savedTheme;
+      try { savedTheme = localStorage.getItem('study-mode-theme'); } catch {}
+      document.documentElement.dataset.theme = ['light', 'dark'].includes(savedTheme)
+        ? savedTheme : (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    })();
+  </script>
   <style>
     :root {
-      --ink: #1e293b;
-      --mut: #64748b;
-      --line: #e2e8f0;
-      --bg: #f8fafc;
-      --card: #ffffff;
-      --pri: #4f46e5;
-      --prib: #eef2ff;
-      --g: #16a34a;
-      --gb: #dcfce7;
-      --a: #d97706;
-      --ab: #fef3c7;
-      --r: #dc2626;
-      --rb: #fee2e2;
-      --b: #2563eb;
-      --bb: #dbeafe;
+      color-scheme: light;
+      --ink:#203433; --mut:#5c706e; --line:#dde7e3; --bg:#f3f6f3; --card:#fff;
+      --surface:#f5f8f6; --pri:#176b5b; --pri-hover:#105344; --prib:#e7f3ed;
+      --g:#187044; --gb:#e4f4e9; --a:#8a570e; --ab:#fff4dc;
+      --r:#ae3838; --rb:#fceaea; --b:#285c9b; --bb:#eaf1fc;
+      --shadow:0 6px 24px rgb(24 56 44 / 4%);
     }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      color: var(--ink);
-      background: var(--bg);
-      font-size: 14.5px;
-      line-height: 1.5;
+    :root[data-theme="dark"] {
+      color-scheme:dark;
+      --ink:#e3eeea; --mut:#a2b8ae; --line:#30473e; --bg:#101b17; --card:#192821;
+      --surface:#21342b; --pri:#91d8b6; --pri-hover:#b3e8cc; --prib:#244637;
+      --g:#a0dfb4; --gb:#203e2b; --a:#f0cd8a; --ab:#43351e;
+      --r:#f5abab; --rb:#442727; --b:#b3cff7; --bb:#25364d;
+      --shadow:0 6px 24px rgb(0 0 0 / 12%);
     }
-    header {
-      padding: 16px 28px;
-      border-bottom: 1px solid var(--line);
-      background: #fff;
-    }
-    .badge {
-      display: inline-block;
-      padding: 3px 10px;
-      border-radius: 999px;
-      font-size: 12px;
-      font-weight: 600;
-      background: var(--prib);
-      color: var(--pri);
-      margin-bottom: 6px;
-    }
-    h1 { font-size: 20px; margin: 0 0 6px; color: #0f172a; }
-    .sub { color: var(--mut); font-size: 13.5px; max-width: 1000px; }
-    
-    .scenario-bar {
-      display: flex;
-      gap: 10px;
-      margin-top: 14px;
-      flex-wrap: wrap;
-      align-items: center;
-      background: #f1f5f9;
-      padding: 10px 14px;
-      border-radius: 12px;
-    }
-    .scenario-bar span { font-weight: 600; font-size: 13px; color: var(--ink); }
-    .scenario-btn {
-      border: 1px solid var(--line);
-      background: #fff;
-      border-radius: 8px;
-      padding: 6px 12px;
-      font: inherit;
-      font-size: 13px;
-      cursor: pointer;
-      transition: all .2s;
-    }
-    .scenario-btn.active {
-      border-color: var(--pri);
-      background: var(--pri);
-      color: #fff;
-      font-weight: 600;
-    }
-
-    main {
-      display: grid;
-      grid-template-columns: 440px 1fr;
-      gap: 24px;
-      padding: 24px 28px;
-      max-width: 1380px;
-      margin: 0 auto;
-    }
-
-    /* Khung màn hình học viên */
-    .phone {
-      background: #fff;
-      border: 1px solid var(--line);
-      border-radius: 24px;
-      padding: 16px;
-      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
-      display: flex;
-      flex-direction: column;
-      height: 740px;
-    }
-    .bar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 12px;
-      color: var(--mut);
-      padding: 0 6px 10px;
-      border-bottom: 1px solid var(--line);
-      font-weight: 600;
-    }
-    .course-badge {
-      margin: 10px 0;
-      padding: 10px 12px;
-      border-radius: 10px;
-      background: #f1f5f9;
-      border: 1px solid var(--line);
-      font-size: 12.5px;
-      color: #334155;
-    }
-    .course-badge b { color: var(--pri); }
-    
-    .chat-scroll {
-      flex: 1;
-      overflow-y: auto;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      padding: 8px 2px;
-    }
-
-    .msg-user {
-      align-self: flex-end;
-      background: var(--pri);
-      color: #fff;
-      padding: 10px 14px;
-      border-radius: 16px 16px 2px 16px;
-      max-width: 88%;
-      font-size: 14px;
-      box-shadow: 0 2px 4px rgba(79, 70, 229, 0.2);
-    }
-    .msg-ai {
-      align-self: flex-start;
-      background: #f8fafc;
-      border: 1px solid var(--line);
-      padding: 12px 14px;
-      border-radius: 16px 16px 16px 2px;
-      max-width: 96%;
-      font-size: 13.5px;
-    }
-    .ai-sender {
-      font-size: 11.5px;
-      color: var(--mut);
-      font-weight: 600;
-      margin-bottom: 6px;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
-    
-    .alert-box {
-      border-radius: 10px;
-      padding: 9px 12px;
-      margin-top: 8px;
-      font-size: 13px;
-      line-height: 1.45;
-    }
-    .alert-warn { background: var(--ab); border: 1px solid #fde68a; color: #92400e; }
-    .alert-hold { background: var(--gb); border: 1px solid #86efac; color: #166534; font-weight: 500; }
-    .alert-err { background: var(--rb); border: 1px solid #fca5a5; color: #991b1b; }
-    .alert-done { background: var(--bb); border: 1px solid #93c5fd; color: #1e40af; }
-
-    .evid-box {
-      font-size: 12px;
-      color: var(--mut);
-      border-left: 3px solid var(--pri);
-      padding-left: 8px;
-      margin-top: 8px;
-      background: #faf5ff;
-      padding-top: 4px;
-      padding-bottom: 4px;
-    }
-
-    .btn-row {
-      display: flex;
-      gap: 6px;
-      flex-wrap: wrap;
-      margin-top: 10px;
-    }
-    .btn {
-      border: 0;
-      border-radius: 8px;
-      padding: 7px 12px;
-      font: inherit;
-      font-size: 13px;
-      cursor: pointer;
-      font-weight: 500;
-      transition: all .15s;
-    }
-    .btn-pri { background: var(--pri); color: #fff; }
-    .btn-pri:hover { background: #4338ca; }
-    .btn-sec { background: #fff; border: 1px solid var(--line); color: var(--ink); }
-    .btn-sec:hover { background: #f1f5f9; }
-    .btn-ta { background: #f8fafc; border: 1px dashed #6366f1; color: #4f46e5; font-size: 12px; }
-
-    .hax-tag {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 19px;
-      height: 19px;
-      border-radius: 50%;
-      background: #ea580c;
-      color: #fff;
-      font-size: 11px;
-      font-weight: 700;
-      margin-right: 4px;
-      vertical-align: 1px;
-      flex: none;
-    }
-    .hide-hax .hax-tag { display: none; }
-
-    /* Cột bên phải: Panels thông tin */
-    .sidebar {
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
-    }
-    .panel {
-      background: #fff;
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      padding: 18px 20px;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-    }
-    .panel h2 {
-      font-size: 15px;
-      margin: 0 0 10px;
-      color: #0f172a;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .promise-text {
-      font-size: 14px;
-      border-left: 4px solid var(--pri);
-      padding: 8px 12px;
-      background: #f5f3ff;
-      border-radius: 0 8px 8px 0;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 13px;
-    }
-    th, td {
-      border-bottom: 1px solid var(--line);
-      padding: 8px 6px;
-      text-align: left;
-      vertical-align: top;
-    }
-    th { color: var(--mut); font-weight: 600; font-size: 12px; }
-    .pill {
-      display: inline-block;
-      padding: 2px 8px;
-      border-radius: 999px;
-      font-size: 11.5px;
-      font-weight: 600;
-      white-space: nowrap;
-    }
-    .p-auto { background: var(--gb); color: #15803d; }
-    .p-ask { background: var(--ab); color: #b45309; }
-    .p-ban { background: var(--rb); color: #b91c1c; }
-
-    .hax-list {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-    .hax-list li {
-      font-size: 13px;
-      line-height: 1.4;
-      display: flex;
-      gap: 8px;
-      align-items: flex-start;
-    }
-
-    /* Màn hình hàng đợi TA */
-    .ta-card {
-      border: 1px solid #cbd5e1;
-      border-radius: 10px;
-      padding: 12px;
-      background: #f8fafc;
-      margin-top: 8px;
-      font-size: 13px;
-    }
-    .ta-card b { color: #0f172a; }
+    * { box-sizing:border-box; }
+    body { margin:0; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; color:var(--ink); background:var(--bg); font-size:14px; line-height:1.65; }
+    button,input { font:inherit; }
+    button { cursor:pointer; }
+    button,a,input { -webkit-tap-highlight-color:transparent; }
+    button:focus-visible,a:focus-visible,input:focus-visible,[tabindex]:focus-visible { outline:3px solid var(--pri); outline-offset:4px; }
+    button { transition:background .15s,border-color .15s,box-shadow .15s; }
+    .skip-link { position:fixed; top:-80px; left:16px; z-index:10; background:var(--card); color:var(--ink); padding:12px 20px; border:2px solid var(--pri); border-radius:10px; }
+    .skip-link:focus { top:12px; }
+    header { max-width:1440px; margin:auto; padding:26px 36px 0; }
+    .header-top,.brand,.header-actions { display:flex; align-items:center; gap:12px; }
+    .header-top { justify-content:space-between; padding-bottom:22px; border-bottom:1px solid var(--line); }
+    .brand-icon { display:grid; place-items:center; width:42px; height:42px; flex:none; border-radius:13px; background:var(--pri); color:var(--bg); }
+    .brand-icon svg { display:block; width:30px; height:30px; }
+    .brand-name { font-size:18px; font-weight:750; letter-spacing:-.5px; }
+    .brand-caption { color:var(--mut); font-size:11px; letter-spacing:1px; text-transform:uppercase; }
+    .badge { display:inline-flex; padding:4px 10px; border:1px solid var(--line); border-radius:7px; font-size:11px; font-weight:600; color:var(--mut); }
+    .theme-toggle { display:flex; align-items:center; gap:8px; padding:9px 13px; color:var(--ink); background:var(--card); border:1px solid var(--line); border-radius:10px; min-height:44px; }
+    .theme-toggle:hover { background:var(--prib); border-color:var(--pri); }
+    .theme-icon { font-size:18px; line-height:1; }
+    .intro { padding:26px 0 23px; }
+    .eyebrow { color:var(--pri); font-size:11px; font-weight:750; letter-spacing:1.6px; text-transform:uppercase; }
+    h1 { font-size:clamp(24px,3vw,34px); line-height:1.25; font-weight:750; letter-spacing:-1px; margin:8px 0 10px; }
+    .sub { color:var(--mut); font-size:14px; max-width:770px; }
+    .scenario-bar { padding:18px 0 0; border-top:1px solid var(--line); }
+    .scenario-heading { display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; margin-bottom:12px; }
+    .scenario-label { font-size:12px; font-weight:700; }
+    .annotation-toggle { display:flex; align-items:center; gap:8px; font-size:12px; color:var(--mut); cursor:pointer; min-height:30px; }
+    input[type="checkbox"] { accent-color:var(--pri); width:16px; height:16px; }
+    .scenario-options { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:10px; }
+    .scenario-btn { display:flex; align-items:center; gap:10px; text-align:left; border:1px solid var(--line); background:var(--card); color:var(--ink); border-radius:12px; padding:13px; min-height:76px; }
+    .scenario-btn:hover { border-color:var(--pri); background:var(--prib); }
+    .scenario-number { display:grid; place-items:center; width:30px; height:30px; flex:none; border-radius:9px; background:var(--surface); font-size:12px; color:var(--mut); font-weight:700; }
+    .scenario-btn strong { display:block; font-size:13px; font-weight:650; }
+    .scenario-btn small { display:block; color:var(--mut); font-size:11px; margin-top:2px; }
+    .scenario-btn.active { border-color:var(--pri); background:var(--prib); box-shadow:inset 0 0 0 1px var(--pri); }
+    .scenario-btn.active .scenario-number { background:var(--pri); color:var(--bg); }
+    main { display:grid; grid-template-columns:minmax(0,1.45fr) minmax(320px,1fr); align-items:start; gap:24px; padding:24px 36px 40px; max-width:1440px; margin:auto; }
+    .phone { background:var(--card); border:1px solid var(--line); border-radius:18px; box-shadow:var(--shadow); display:flex; flex-direction:column; min-width:0; overflow:hidden; }
+    .bar { display:flex; justify-content:space-between; align-items:center; gap:12px; padding:18px 22px; border-bottom:1px solid var(--line); }
+    .chat-title { font-size:15px; font-weight:700; }
+    .chat-caption { color:var(--mut); font-size:12px; }
+    .session-status { display:flex; align-items:center; gap:6px; color:var(--g); font-size:11px; white-space:nowrap; }
+    .session-status::before { content:""; width:6px; height:6px; border-radius:50%; background:var(--g); }
+    .course-badge { margin:16px 20px 8px; padding:12px 14px; border-radius:10px; background:var(--surface); border:1px solid var(--line); color:var(--mut); font-size:12px; }
+    .course-badge b { color:var(--ink); }
+    .chat-scroll { height:620px; overflow-y:auto; overscroll-behavior:contain; scrollbar-width:thin; scrollbar-color:var(--line) transparent; display:flex; flex-direction:column; gap:20px; padding:20px; }
+    .chat-scroll > * { flex-shrink:0; }
+    .msg-user { align-self:flex-end; background:var(--prib); color:var(--ink); padding:14px 18px; border:1px solid var(--line); border-radius:16px 16px 4px 16px; max-width:88%; font-size:14px; }
+    .msg-ai { align-self:flex-start; width:100%; background:var(--card); padding:0 2px; max-width:100%; font-size:14px; overflow-wrap:anywhere; }
+    .ai-sender { font-size:12px; color:var(--pri); font-weight:700; margin-bottom:12px; display:flex; align-items:center; gap:6px; }
+    .alert-box { border-radius:10px; padding:12px 14px; margin-top:10px; font-size:13px; line-height:1.65; border:1px solid var(--line); }
+    .alert-warn { background:var(--ab); color:var(--a); }
+    .alert-hold { background:var(--gb); color:var(--g); }
+    .alert-err { background:var(--rb); color:var(--r); }
+    .alert-done { background:var(--bb); color:var(--b); }
+    .evid-box { font-size:12px; color:var(--mut); border-left:3px solid var(--pri); padding:10px 12px; margin-top:12px; background:var(--surface); border-radius:0 8px 8px 0; }
+    .btn-row { display:flex; gap:8px; flex-wrap:wrap; margin-top:14px; }
+    .btn { border:1px solid transparent; border-radius:9px; padding:10px 13px; min-height:44px; font-size:12px; font-weight:600; line-height:1.5; }
+    .btn-pri { background:var(--pri); color:var(--bg); }
+    .btn-pri:hover { background:var(--pri-hover); }
+    .btn-sec { background:var(--card); border-color:var(--line); color:var(--ink); }
+    .btn-sec:hover,.btn-ta:hover { background:var(--prib); border-color:var(--pri); }
+    .btn-ta { background:var(--surface); border:1px dashed var(--pri); color:var(--pri); }
+    .chat-footer { padding:12px 20px; border-top:1px solid var(--line); color:var(--mut); background:var(--surface); font-size:11px; text-align:center; }
+    .hax-tag { display:inline-flex; align-items:center; justify-content:center; width:18px; height:18px; border-radius:5px; background:var(--ab); color:var(--a); font-size:10px; font-weight:750; margin-right:4px; vertical-align:1px; flex:none; }
+    .hide-hax .hax-tag { display:none; }
+    .sidebar { display:flex; flex-direction:column; gap:16px; min-width:0; }
+    .panel { background:var(--card); border:1px solid var(--line); border-radius:16px; padding:20px; box-shadow:var(--shadow); min-width:0; }
+    .panel h2,.panel summary { font-size:14px; font-weight:700; margin:0 0 14px; color:var(--ink); }
+    .panel summary { cursor:pointer; margin:0; min-height:24px; }
+    .panel[open] summary { margin-bottom:14px; }
+    .promise-text { font-size:13px; border-left:3px solid var(--pri); padding:12px 14px; background:var(--prib); border-radius:0 9px 9px 0; }
+    .table-wrap { overflow-x:auto; }
+    table { width:100%; border-collapse:collapse; font-size:12px; }
+    th,td { border-bottom:1px solid var(--line); padding:11px 7px; text-align:left; vertical-align:top; }
+    th { color:var(--mut); font-weight:600; font-size:11px; }
+    tr:last-child td { border-bottom:0; }
+    code { font-size:11px; overflow-wrap:anywhere; }
+    .row-ask { background:var(--ab); }
+    .row-ban { background:var(--rb); }
+    .pill { display:inline-block; padding:3px 7px; border-radius:6px; font-size:10px; font-weight:700; white-space:nowrap; }
+    .p-auto { background:var(--gb); color:var(--g); }
+    .p-ask { background:var(--ab); color:var(--a); }
+    .p-ban { background:var(--rb); color:var(--r); }
+    .hax-list { list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:12px; }
+    .hax-list li { font-size:12px; line-height:1.65; }
+    .hax-list .hax-tag { margin-right:6px; }
+    .ta-card { border:1px solid var(--line); border-radius:12px; padding:16px; background:var(--surface); margin-top:8px; font-size:13px; }
+    .ta-title,.ta-card b { color:var(--ink); }
+    .ta-actions { margin-top:12px; display:flex; flex-wrap:wrap; gap:8px; }
+    .resolved { color:var(--g); font-weight:600; }
+    .page-footer { max-width:1440px; margin:auto; padding:0 36px 24px; color:var(--mut); font-size:11px; }
+    @media (min-width:1500px) { .chat-scroll { height:660px; } }
+    @media (max-width:1000px) { main { grid-template-columns:minmax(0,1.25fr) minmax(280px,1fr); gap:16px; } header { padding:22px 24px 0; } main { padding:20px 24px 32px; } .scenario-options { grid-template-columns:repeat(2,minmax(0,1fr)); } .header-actions .badge { display:none; } }
+    @media (max-width:760px) { main { grid-template-columns:minmax(0,1fr); } .chat-scroll { height:auto; max-height:70vh; min-height:320px; } .sidebar { gap:12px; } .intro { padding-top:22px; } }
+    @media (max-width:440px) { header { padding:16px 16px 0; } main { padding:16px 12px 28px; } .scenario-btn { padding:10px; gap:7px; } .scenario-number { width:24px; height:24px; } .scenario-btn strong { font-size:12px; } .scenario-btn small { font-size:10px; } .theme-toggle { padding:9px 10px; font-size:12px; } .brand-name { font-size:16px; } .brand-caption { font-size:9px; } .bar { padding:16px; } .chat-scroll { padding:16px; } .course-badge { margin:12px 14px 4px; } .btn-row .btn { flex:1 1 100%; } .page-footer { padding:0 16px 20px; } }
+    @media (prefers-reduced-motion:reduce) { *,*::before,*::after { transition:none !important; scroll-behavior:auto !important; } }
   </style>
 </head>
 <body>
 
+<a class="skip-link" href="#chatFlow">Đến nội dung học tập</a>
 <header>
-  <div class="badge">AI20K K5 · LAB5 · Nhóm MayChieu · Lớp L3B</div>
-  <h1>Prototype Trợ lý học bài Study Mode — Trang khoá học (Track T2)</h1>
-  <div class="sub">
-    Thiết kế tập trung vào <b>Ca khó (Edge Cases)</b>: Học viên xin giải hộ bài tập đang mở lúc nửa đêm, phát hiện câu sai trong tài liệu §3.3, và quy trình TA kiểm duyệt đăng FAQ.
+  <div class="header-top">
+    <div class="brand"><div class="brand-icon" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M16 14c-3-2-7-3-12-2v14c5-1 9 0 12 2 3-2 7-3 12-2v-8M16 14v14M7.5 17c2-.1 3.5.3 5 1M7.5 21c2-.1 3.5.3 5 1M20 22l4-.5"/><path d="M19 4h8a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-4l-4 3v-3a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Z"/><path d="M21 8.5h4"/></svg></div><div><div class="brand-name">Study Mode</div><div class="brand-caption">Không ngừng khám phá</div></div></div>
+    <div class="header-actions"><span class="badge">LAB5 · MayChieu · L3B</span><button id="themeToggle" class="theme-toggle" type="button" onclick="toggleTheme()" aria-label="Chuyển sang chế độ tối" aria-pressed="false"><span class="theme-icon" aria-hidden="true">☾</span><span id="themeLabel">Chế độ tối</span></button></div>
   </div>
-
-  <div class="scenario-bar">
-    <span>Chọn ca để trải nghiệm & Demo:</span>
-    <button class="scenario-btn active" data-sc="sc1" onclick="loadScenario('sc1', this)">Ca 1 (Khó nhất): Xin giải hộ Bài 3 đang mở · Socratic</button>
-    <button class="scenario-btn" data-sc="sc2" onclick="loadScenario('sc2', this)">Ca 2: Tài liệu §3.3 bị sai toán · Góp ý Giảng viên</button>
-    <button class="scenario-btn" data-sc="sc3" onclick="loadScenario('sc3', this)">Ca 3: Hỏi p-value ở Slide 12 · Ngoài phạm vi Buổi 3</button>
-    <button class="scenario-btn" data-sc="sc4" onclick="loadScenario('sc4', this)">Bonus: Màn hình kiểm duyệt FAQ của TA</button>
-    <label style="margin-left:auto; font-size:13px; cursor:pointer;">
-      <input type="checkbox" id="toggleHax" checked onchange="toggleAnnotations()"> Hiện số chú thích HAX/PAIR
-    </label>
-  </div>
+  <div class="intro"><div class="eyebrow">Góc học tập · Phân tích dữ liệu</div><h1>Hiểu bài hơn, từng bước một.</h1><div class="sub">Gia sư AI đồng hành cùng bạn ôn tập, tìm hiểu tài liệu và kết nối với trợ giảng khi cần hỗ trợ.</div></div>
+  <nav class="scenario-bar" aria-label="Tình huống trải nghiệm">
+    <div class="scenario-heading"><span class="scenario-label">Chọn tình huống để bắt đầu</span><label class="annotation-toggle"><input type="checkbox" id="toggleHax" checked onchange="toggleAnnotations()"> Hiện chú thích HAX / PAIR</label></div>
+    <div class="scenario-options">
+      <button class="scenario-btn active" data-sc="sc1" aria-pressed="true" onclick="loadScenario('sc1', this)"><span class="scenario-number">01</span><span><strong>Gợi ý bài tập</strong><small>Tự giải cùng gia sư Socratic</small></span></button>
+      <button class="scenario-btn" data-sc="sc2" aria-pressed="false" onclick="loadScenario('sc2', this)"><span class="scenario-number">02</span><span><strong>Góp ý tài liệu</strong><small>Kiểm tra nội dung mục §3.3</small></span></button>
+      <button class="scenario-btn" data-sc="sc3" aria-pressed="false" onclick="loadScenario('sc3', this)"><span class="scenario-number">03</span><span><strong>Hỏi ngoài bài học</strong><small>Tìm đúng lộ trình kiến thức</small></span></button>
+      <button class="scenario-btn" data-sc="sc4" aria-pressed="false" onclick="loadScenario('sc4', this)"><span class="scenario-number">04</span><span><strong>Hàng đợi trợ giảng</strong><small>Xem xét &amp; duyệt FAQ</small></span></button>
+    </div>
+  </nav>
 </header>
 
 <main id="mainContainer">
   <!-- Cột giao diện học viên -->
-  <section class="phone">
-    <div class="bar">
-      <span>Trang khoá học · Phân tích Dữ liệu</span>
-      <span>23:15 (Tối muộn)</span>
-    </div>
+  <section class="phone" aria-labelledby="chatTitle">
+    <div class="bar"><div><div class="chat-title" id="chatTitle">Gia sư AI của bạn</div><div class="chat-caption" id="chatCaption">Hướng dẫn từng bước · Không làm hộ bài tập</div></div><span class="session-status" id="sessionStatus">Study Mode</span></div>
 
     <div class="course-badge">
       <b>Buổi 3: Thống kê mô tả</b> · Tài liệu: §3.1 – §3.5<br>
       Bài tập 3: Đang mở (Hạn chót: <b>13/11 23:59</b>) · TA trực: 08:00 – 22:00
     </div>
 
-    <div class="chat-scroll" id="chatFlow">
+    <div class="chat-scroll" id="chatFlow" role="log" aria-label="Nội dung trao đổi" aria-live="polite" tabindex="0">
       <!-- Nội dung tương tác sẽ được load động -->
     </div>
+    <div class="chat-footer">Bản trải nghiệm mô phỏng · Chọn các nút trong hội thoại để tiếp tục</div>
   </section>
 
   <!-- Cột thuyết minh & Bằng chứng -->
   <div class="sidebar">
     <div class="panel">
-      <h2>Lời hứa với người học (Product Promise)</h2>
+      <h2>Bạn được hỗ trợ như thế nào?</h2>
       <div class="promise-text" id="promiseDesc">
         <!-- Lời hứa theo kịch bản -->
       </div>
     </div>
 
-    <div class="panel">
-      <h2>Ma trận Mức tự chủ 4 Tools theo Cost-of-error</h2>
-      <table>
+    <details class="panel">
+      <summary>Quyền hạn của trợ lý AI · 4 công cụ</summary>
+      <div class="table-wrap" role="region" aria-label="Bảng quyền hạn công cụ" tabindex="0"><table>
         <thead>
           <tr>
             <th>Tên Tool</th>
@@ -363,7 +191,7 @@
             <td><span class="pill p-auto">Tự làm</span></td>
             <td>Chỉ đọc giáo trình Buổi 3. Tự động trích dẫn mục (§3.1… §3.5) để học viên tự kiểm chứng.</td>
           </tr>
-          <tr style="background:#fefce8;">
+          <tr class="row-ask">
             <td><code>goi_y_bai_tap</code></td>
             <td><span class="pill p-ask">Giới hạn mức</span></td>
             <td><b>Cấm đưa đáp số bài đang mở:</b> Chỉ đặt câu hỏi dẫn dắt từng bước (Socratic), tránh học vẹt.</td>
@@ -373,26 +201,54 @@
             <td><span class="pill p-auto">Tự làm</span></td>
             <td>Tự động đưa câu hỏi vào hàng đợi của TA đêm muộn; thông báo rõ giờ TA phản hồi (08:00 sáng mai).</td>
           </tr>
-          <tr style="background:#fff1f2;">
+          <tr class="row-ban">
             <td><code>dang_FAQ</code></td>
             <td><span class="pill p-ban">CẤM AI tự làm</span></td>
             <td><b>Ảnh hưởng toàn lớp:</b> Sai một câu là cả lớp học sai. Bắt buộc TA duyệt mới được công khai.</td>
           </tr>
         </tbody>
-      </table>
-    </div>
+      </table></div>
+    </details>
 
-    <div class="panel">
-      <h2>Các nguyên tắc HAX / PAIR ứng dụng trên màn hình</h2>
+    <details class="panel" open>
+      <summary>Giải thích thiết kế · HAX / PAIR</summary>
       <ul class="hax-list" id="haxNotes">
         <!-- Chú thích HAX tương ứng -->
       </ul>
-    </div>
+    </details>
   </div>
 </main>
+<footer class="page-footer">MayChieu · Track T2: Giáo dục <span aria-hidden="true">/</span> Prototype tương tác · Dữ liệu và thao tác được mô phỏng</footer>
 
 <script>
   let currentScenario = 'sc1';
+  const systemTheme = window.matchMedia('(prefers-color-scheme: dark)');
+  let manualTheme = false;
+  try { manualTheme = ['light', 'dark'].includes(localStorage.getItem('study-mode-theme')); } catch {}
+
+  function syncThemeButton() {
+    const dark = document.documentElement.dataset.theme === 'dark';
+    const button = document.getElementById('themeToggle');
+    button.setAttribute('aria-pressed', String(dark));
+    button.setAttribute('aria-label', dark ? 'Chuyển sang chế độ sáng' : 'Chuyển sang chế độ tối');
+    document.getElementById('themeLabel').textContent = dark ? 'Chế độ sáng' : 'Chế độ tối';
+    button.querySelector('.theme-icon').textContent = dark ? '☀' : '☾';
+  }
+
+  function toggleTheme() {
+    const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+    document.documentElement.dataset.theme = next;
+    manualTheme = true;
+    try { localStorage.setItem('study-mode-theme', next); } catch {}
+    syncThemeButton();
+  }
+
+  systemTheme.addEventListener('change', event => {
+    if (!manualTheme) {
+      document.documentElement.dataset.theme = event.matches ? 'dark' : 'light';
+      syncThemeButton();
+    }
+  });
 
   function toggleAnnotations() {
     const isChecked = document.getElementById('toggleHax').checked;
@@ -406,6 +262,10 @@
 
   function loadScenario(sc, btnEl) {
     currentScenario = sc;
+    document.querySelectorAll('.scenario-btn').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.sc === sc)));
+    document.getElementById('chatTitle').textContent = sc === 'sc4' ? 'Không gian trợ giảng' : 'Gia sư AI của bạn';
+    document.getElementById('chatCaption').textContent = sc === 'sc4' ? 'Hàng đợi câu hỏi · Kiểm duyệt trước khi đăng' : 'Hướng dẫn từng bước · Không làm hộ bài tập';
+    document.getElementById('sessionStatus').textContent = sc === 'sc4' ? 'TA Queue' : 'Study Mode';
     document.querySelectorAll('.scenario-btn').forEach(b => b.classList.remove('active'));
     
     if (btnEl) {
@@ -548,13 +408,13 @@
       <i>"TA nắm quyền kiểm soát tối cao trước khi bất kỳ thông tin nào được đưa lên bảng tin chung cả lớp."</i> Minh chứng cho mức tự chủ <b>CẤM AI tự động đăng FAQ</b>.`;
 
       chat.innerHTML = `
-        <div style="font-weight:700; color:#334155; margin-bottom:6px;">👨‍🏫 Giao diện quản trị của Trợ giảng (TA Queue):</div>
+        <div class="ta-title">👨‍🏫 Giao diện quản trị của Trợ giảng (TA Queue):</div>
         
         <div class="ta-card" id="taCard1">
           <b>Phiếu #TK-303 (Từ Ca 2 lúc 23:18):</b><br>
           • <b>Nội dung:</b> Học viên hỏi về câu sai ở §3.3: <i>"Độ lệch chuẩn luôn nhỏ hơn phương sai"</i>.<br>
           • <b>Đề xuất của AI:</b> Đính chính ngoại lệ khi phương sai < 1 và đề nghị cập nhật giáo trình.<br>
-          <div style="margin-top:8px; display:flex; gap:6px;">
+          <div class="ta-actions">
             <button class="btn btn-pri" onclick="approveFAQ()">✓ Duyệt đăng bài đính chính lên FAQ lớp</button>
             <button class="btn btn-sec" onclick="dismissTA()">Chỉ lưu nội bộ</button>
           </div>
@@ -564,7 +424,7 @@
           <b>Phiếu #TK-304 (Từ Ca 1 lúc 23:16):</b><br>
           • <b>Nội dung:</b> Học viên hỏi cách tính trung vị Bài tập 3.<br>
           • <b>Trạng thái:</b> AI đã hướng dẫn Socratic bước 1. Học viên đã hiểu và tự giải xong.<br>
-          <small style="color:#16a34a; font-weight:600;">✓ Không vi phạm liêm chính · Đã tự giải quyết</small>
+          <small class="resolved">✓ Không vi phạm liêm chính · Đã tự giải quyết</small>
         </div>
       `;
 
@@ -573,6 +433,7 @@
         <li><b>Kiểm soát chất lượng:</b> Tránh hiện tượng ảo giác AI lan truyền ra toàn bộ cộng đồng học viên.</li>
       `;
     }
+    chat.scrollTop = 0;
   }
 
   function studentAnswer(ans) {
@@ -628,11 +489,12 @@
   }
 
   function dismissTA() {
-    document.getElementById('taCard1').style.display = 'none';
+    document.getElementById('taCard1').innerHTML = '<div class="alert-box alert-hold">✓ <b>Đã lưu nội bộ.</b><br>Phiếu #TK-303 được giữ để trợ giảng theo dõi, chưa xuất bản lên FAQ lớp.</div>';
   }
 
   // Khởi động an toàn không gây lỗi
   window.addEventListener('DOMContentLoaded', () => {
+    syncThemeButton();
     loadScenario('sc1', document.querySelector('[data-sc="sc1"]'));
   });
 </script>
