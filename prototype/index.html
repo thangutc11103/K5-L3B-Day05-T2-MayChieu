@@ -138,16 +138,17 @@
     <div class="brand"><div class="brand-icon" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M16 14c-3-2-7-3-12-2v14c5-1 9 0 12 2 3-2 7-3 12-2v-8M16 14v14M7.5 17c2-.1 3.5.3 5 1M7.5 21c2-.1 3.5.3 5 1M20 22l4-.5"/><path d="M19 4h8a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-4l-4 3v-3a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Z"/><path d="M21 8.5h4"/></svg></div><div><div class="brand-name">Study Mode</div><div class="brand-caption">Không ngừng khám phá</div></div></div>
     <div class="header-actions"><span class="badge">LAB5 · MayChieu · L3B</span><button id="themeToggle" class="theme-toggle" type="button" onclick="toggleTheme()" aria-label="Chuyển sang chế độ tối" aria-pressed="false"><span class="theme-icon" aria-hidden="true">☾</span><span id="themeLabel">Chế độ tối</span></button></div>
   </div>
-  <div class="intro"><div class="eyebrow">Góc học tập · Phân tích dữ liệu</div><h1>Hiểu bài hơn, từng bước một.</h1><div class="sub">Gia sư AI đồng hành cùng bạn ôn tập, tìm hiểu tài liệu và kết nối với trợ giảng khi cần hỗ trợ.</div></div>
-  <nav class="scenario-bar" aria-label="Tình huống trải nghiệm">
-    <div class="scenario-heading"><span class="scenario-label">Chọn tình huống để bắt đầu</span><label class="annotation-toggle"><input type="checkbox" id="toggleHax" checked onchange="toggleAnnotations()"> Hiện chú thích HAX / PAIR</label></div>
-    <div class="scenario-options">
-      <button class="scenario-btn active" data-sc="sc1" aria-pressed="true" onclick="loadScenario('sc1', this)"><span class="scenario-number">01</span><span><strong>Gợi ý bài tập</strong><small>Tự giải cùng gia sư Socratic</small></span></button>
-      <button class="scenario-btn" data-sc="sc2" aria-pressed="false" onclick="loadScenario('sc2', this)"><span class="scenario-number">02</span><span><strong>Góp ý tài liệu</strong><small>Kiểm tra nội dung mục §3.3</small></span></button>
-      <button class="scenario-btn" data-sc="sc3" aria-pressed="false" onclick="loadScenario('sc3', this)"><span class="scenario-number">03</span><span><strong>Hỏi ngoài bài học</strong><small>Tìm đúng lộ trình kiến thức</small></span></button>
-      <button class="scenario-btn" data-sc="sc4" aria-pressed="false" onclick="loadScenario('sc4', this)"><span class="scenario-number">04</span><span><strong>Hàng đợi trợ giảng</strong><small>Xem xét &amp; duyệt FAQ</small></span></button>
-    </div>
-  </nav>
+
+  <div class="scenario-bar">
+    <span>Chọn ca để trải nghiệm & Demo:</span>
+    <button class="scenario-btn active" data-sc="sc1" onclick="loadScenario('sc1', this)">Ca 1 (Khó nhất): Xin giải hộ Bài 3 đang mở · Socratic</button>
+    <button class="scenario-btn" data-sc="sc2" onclick="loadScenario('sc2', this)">Ca 2: Tài liệu §3.3 bị sai toán · Góp ý Giảng viên</button>
+    <button class="scenario-btn" data-sc="sc3" onclick="loadScenario('sc3', this)">Ca 3: Hỏi p-value ở Slide 12 · Ngoài phạm vi Buổi 3</button>
+    <button class="scenario-btn" data-sc="sc4" onclick="loadScenario('sc4', this)">Bonus: Màn hình kiểm duyệt FAQ của TA</button>
+    <label style="margin-left:auto; font-size:13px; cursor:pointer;">
+      <input type="checkbox" id="toggleHax" checked onchange="toggleAnnotations()"> Hiện số chú thích HAX/PAIR
+    </label>
+  </div>
 </header>
 
 <main id="mainContainer">
@@ -433,7 +434,6 @@
         <li><b>Kiểm soát chất lượng:</b> Tránh hiện tượng ảo giác AI lan truyền ra toàn bộ cộng đồng học viên.</li>
       `;
     }
-    chat.scrollTop = 0;
   }
 
   function studentAnswer(ans) {
