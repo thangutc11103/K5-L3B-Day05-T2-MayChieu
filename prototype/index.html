@@ -139,6 +139,7 @@
     <div class="header-actions"><span class="badge">LAB5 · MayChieu · L3B</span><button id="themeToggle" class="theme-toggle" type="button" onclick="toggleTheme()" aria-label="Chuyển sang chế độ tối" aria-pressed="false"><span class="theme-icon" aria-hidden="true">☾</span><span id="themeLabel">Chế độ tối</span></button></div>
   </div>
 
+  <div class="intro"><div class="eyebrow">Góc học tập · Phân tích dữ liệu</div><h1>Hiểu bài hơn, từng bước một.</h1><div class="sub">Gia sư AI đồng hành cùng bạn ôn tập, tìm hiểu tài liệu và kết nối với trợ giảng khi cần hỗ trợ.</div></div>
   <nav class="scenario-bar" aria-label="Chọn ca trải nghiệm">
     <div class="scenario-heading">
       <span class="scenario-label">Chọn ca để trải nghiệm &amp; Demo:</span>
@@ -147,10 +148,10 @@
       </label>
     </div>
     <div class="scenario-options">
-      <button class="scenario-btn active" data-sc="sc1" aria-pressed="true" onclick="loadScenario('sc1', this)">Ca 1 (Khó nhất): Xin giải hộ Bài 3 đang mở · Socratic</button>
-      <button class="scenario-btn" data-sc="sc2" aria-pressed="false" onclick="loadScenario('sc2', this)">Ca 2: Tài liệu §3.3 bị sai toán · Góp ý Giảng viên</button>
-      <button class="scenario-btn" data-sc="sc3" aria-pressed="false" onclick="loadScenario('sc3', this)">Ca 3: Hỏi p-value ở Slide 12 · Ngoài phạm vi Buổi 3</button>
-      <button class="scenario-btn" data-sc="sc4" aria-pressed="false" onclick="loadScenario('sc4', this)">Bonus: Màn hình kiểm duyệt FAQ của TA</button>
+      <button class="scenario-btn active" data-sc="sc1" aria-pressed="true" onclick="loadScenario('sc1', this)"><span class="scenario-number">01</span><span><strong>Ca 1 (Khó nhất): Bài 3 đang mở</strong><small>Xin giải hộ · Hướng dẫn Socratic</small></span></button>
+      <button class="scenario-btn" data-sc="sc2" aria-pressed="false" onclick="loadScenario('sc2', this)"><span class="scenario-number">02</span><span><strong>Ca 2: Tài liệu §3.3 bị sai toán</strong><small>Phản chứng &amp; Góp ý Giảng viên</small></span></button>
+      <button class="scenario-btn" data-sc="sc3" aria-pressed="false" onclick="loadScenario('sc3', this)"><span class="scenario-number">03</span><span><strong>Ca 3: Hỏi p-value ở Slide 12</strong><small>Ngoài phạm vi Buổi 3</small></span></button>
+      <button class="scenario-btn" data-sc="sc4" aria-pressed="false" onclick="loadScenario('sc4', this)"><span class="scenario-number">04</span><span><strong>Bonus: Hàng đợi của TA</strong><small>Kiểm duyệt trước khi đăng FAQ</small></span></button>
     </div>
   </nav>
 </header>
@@ -351,9 +352,9 @@
 
           <div class="evid-box">
             <span class="hax-tag">2</span><b>Phân tích toán học:</b><br>
-            Độ lệch chuẩn $\\sigma = \\sqrt{\\sigma^2}$.<br>
-            • Nếu phương sai lớn hơn 1 (ví dụ $\\sigma^2 = 4$), thì $\\sigma = \\sqrt{4} = 2 < 4$ (Đúng).<br>
-            • <b>Trường hợp ngoại lệ:</b> Nếu phương sai nhỏ hơn 1 (ví dụ $\\sigma^2 = 0.25$), thì $\\sigma = \\sqrt{0.25} = 0.5 > 0.25$ (Độ lệch chuẩn lại <b>lớn hơn</b> phương sai!).
+            Độ lệch chuẩn σ = √(σ²).<br>
+            • Nếu phương sai lớn hơn 1 (ví dụ σ² = 4), thì σ = √4 = 2 &lt; 4 (Đúng).<br>
+            • <b>Trường hợp ngoại lệ:</b> Nếu phương sai nhỏ hơn 1 (ví dụ σ² = 0.25), thì σ = √0.25 = 0.5 &gt; 0.25 (Độ lệch chuẩn lại <b>lớn hơn</b> phương sai!).
           </div>
 
           <p style="margin:8px 0 4px;"><span class="hax-tag">3</span>Cảm ơn bạn đã đọc tài liệu rất kỹ và phát hiện ra điểm này. Bạn hãy ghi chú lại trường hợp ngoại lệ này vào bài học nhé.</p>
@@ -370,7 +371,7 @@
 
       haxNotes.innerHTML = `
         <li><span class="hax-tag">1</span> <b>HAX G10 (Không nguỵ biện):</b> AI từ chối bảo vệ một định lý toán học sai, trung thực thừa nhận tài liệu cần xem lại.</li>
-        <li><span class="hax-tag">2</span> <b>PAIR Explainability:</b> Đưa ví dụ phản chứng toán học rõ ràng ($0.25 < 0.5$) để chứng minh.</li>
+        <li><span class="hax-tag">2</span> <b>PAIR Explainability:</b> Đưa ví dụ phản chứng toán học rõ ràng (0.25 &lt; 0.5) để chứng minh.</li>
         <li><span class="hax-tag">3</span> <b>Đạo đức sư phạm:</b> Khen ngợi tinh thần phản biện của người học.</li>
         <li><span class="hax-tag">4</span> <b>Mức tự chủ Cấm:</b> Cấm AI tự ý gọi lệnh <code>dang_FAQ</code>; tự động chuyển phiếu cho Giảng viên xử lý.</li>
       `;
@@ -446,7 +447,7 @@
       <div class="msg-user">Em tính ra trung vị là ${ans} ạ!</div>
       <div class="msg-ai">
         <div class="alert-box alert-hold">
-          🎉 <b>Chính xác!</b> Trung vị của 11 và 12 chính là $(11 + 12)/2 = 11.5$ triệu đồng.<br>
+          🎉 <b>Chính xác!</b> Trung vị của 11 và 12 chính là (11 + 12) / 2 = 11.5 triệu đồng.<br>
           Bạn thấy đấy, con số 11.5 phản ánh rất đúng mức lương của phần lớn nhân viên phòng, không hề bị kéo lệch bởi mức lương cá biệt 45 triệu!
         </div>
         <p style="margin:8px 0 4px;">Bây giờ bạn đã sẵn sàng làm câu (b) của Bài tập 3 rồi đấy: <i>"Con số nào mô tả lương điển hình tốt hơn?"</i></p>
@@ -462,8 +463,8 @@
       <div class="msg-ai">
         <div class="alert-box alert-done">
           <b>Công thức §3.1:</b> Lấy tổng cả 8 người chia cho 8.<br>
-          Tổng = $9 + 10 + 10 + 11 + 12 + 12 + 13 + 45 = 122$.<br>
-          Bạn thử lấy $122 / 8$ ra bao nhiêu nhé? Hãy để ý xem con số này có bị số <b>45</b> kéo lên cao hẳn so với mức lương chung không!
+          Tổng = 9 + 10 + 10 + 11 + 12 + 12 + 13 + 45 = 122.<br>
+          Bạn thử lấy 122 / 8 ra bao nhiêu nhé? Hãy để ý xem con số này có bị số <b>45</b> kéo lên cao hẳn so với mức lương chung không!
         </div>
       </div>
     `;
