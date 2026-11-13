@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>LAB5 · T3 Du lịch · Nhóm MayChieu · Prototype Trợ lý Đổi chuyến</title>
+  <title>LAB5 · T2 Giáo dục · Nhóm MayChieu · Prototype Trợ lý Study Mode</title>
   <style>
     :root {
       --ink: #1e293b;
@@ -11,8 +11,8 @@
       --line: #e2e8f0;
       --bg: #f8fafc;
       --card: #ffffff;
-      --pri: #0284c7;
-      --prib: #e0f2fe;
+      --pri: #4f46e5;
+      --prib: #eef2ff;
       --g: #16a34a;
       --gb: #dcfce7;
       --a: #d97706;
@@ -42,8 +42,8 @@
       border-radius: 999px;
       font-size: 12px;
       font-weight: 600;
-      background: var(--bb);
-      color: var(--b);
+      background: var(--prib);
+      color: var(--pri);
       margin-bottom: 6px;
     }
     h1 { font-size: 20px; margin: 0 0 6px; color: #0f172a; }
@@ -79,23 +79,23 @@
 
     main {
       display: grid;
-      grid-template-columns: 420px 1fr;
+      grid-template-columns: 440px 1fr;
       gap: 24px;
       padding: 24px 28px;
       max-width: 1380px;
       margin: 0 auto;
     }
 
-    /* Khung điện thoại thoại */
+    /* Khung màn hình học viên */
     .phone {
       background: #fff;
       border: 1px solid var(--line);
-      border-radius: 28px;
+      border-radius: 24px;
       padding: 16px;
       box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
       display: flex;
       flex-direction: column;
-      height: 720px;
+      height: 740px;
     }
     .bar {
       display: flex;
@@ -107,15 +107,17 @@
       border-bottom: 1px solid var(--line);
       font-weight: 600;
     }
-    .trip-card {
+    .course-badge {
       margin: 10px 0;
-      padding: 12px;
-      border-radius: 12px;
-      background: var(--rb);
-      border: 1px solid #fca5a5;
-      font-size: 13px;
+      padding: 10px 12px;
+      border-radius: 10px;
+      background: #f1f5f9;
+      border: 1px solid var(--line);
+      font-size: 12.5px;
+      color: #334155;
     }
-    .trip-card b { color: var(--r); }
+    .course-badge b { color: var(--pri); }
+    
     .chat-scroll {
       flex: 1;
       overflow-y: auto;
@@ -131,9 +133,9 @@
       color: #fff;
       padding: 10px 14px;
       border-radius: 16px 16px 2px 16px;
-      max-width: 85%;
+      max-width: 88%;
       font-size: 14px;
-      box-shadow: 0 2px 4px rgba(2, 132, 199, 0.2);
+      box-shadow: 0 2px 4px rgba(79, 70, 229, 0.2);
     }
     .msg-ai {
       align-self: flex-start;
@@ -141,7 +143,7 @@
       border: 1px solid var(--line);
       padding: 12px 14px;
       border-radius: 16px 16px 16px 2px;
-      max-width: 95%;
+      max-width: 96%;
       font-size: 13.5px;
     }
     .ai-sender {
@@ -156,10 +158,10 @@
     
     .alert-box {
       border-radius: 10px;
-      padding: 9px 11px;
+      padding: 9px 12px;
       margin-top: 8px;
       font-size: 13px;
-      line-height: 1.4;
+      line-height: 1.45;
     }
     .alert-warn { background: var(--ab); border: 1px solid #fde68a; color: #92400e; }
     .alert-hold { background: var(--gb); border: 1px solid #86efac; color: #166534; font-weight: 500; }
@@ -169,33 +171,12 @@
     .evid-box {
       font-size: 12px;
       color: var(--mut);
-      border-left: 3px solid #cbd5e1;
+      border-left: 3px solid var(--pri);
       padding-left: 8px;
       margin-top: 8px;
-      background: #f8fafc;
+      background: #faf5ff;
       padding-top: 4px;
       padding-bottom: 4px;
-    }
-
-    .flight-option {
-      border: 1.5px solid var(--line);
-      border-radius: 10px;
-      padding: 9px 11px;
-      margin-top: 6px;
-      background: #fff;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      transition: all .2s;
-    }
-    .flight-option.selected {
-      border-color: var(--g);
-      background: #f0fdf4;
-    }
-    .flight-option.disabled {
-      opacity: 0.6;
-      background: #f1f5f9;
-      border-color: #cbd5e1;
     }
 
     .btn-row {
@@ -214,22 +195,11 @@
       font-weight: 500;
       transition: all .15s;
     }
-    .btn-pri { background: var(--g); color: #fff; }
-    .btn-pri:hover { background: #15803d; }
+    .btn-pri { background: var(--pri); color: #fff; }
+    .btn-pri:hover { background: #4338ca; }
     .btn-sec { background: #fff; border: 1px solid var(--line); color: var(--ink); }
     .btn-sec:hover { background: #f1f5f9; }
-    .btn-danger { background: var(--r); color: #fff; }
-    .btn-danger:hover { background: #b91c1c; }
-    .btn-staff { background: #f1f5f9; border: 1px dashed var(--mut); color: var(--mut); font-size: 12px; }
-
-    .timer-badge {
-      font-variant-numeric: tabular-nums;
-      font-weight: 700;
-      color: #166534;
-      background: #bbf7d0;
-      padding: 2px 6px;
-      border-radius: 6px;
-    }
+    .btn-ta { background: #f8fafc; border: 1px dashed #6366f1; color: #4f46e5; font-size: 12px; }
 
     .hax-tag {
       display: inline-flex;
@@ -273,7 +243,7 @@
       font-size: 14px;
       border-left: 4px solid var(--pri);
       padding: 8px 12px;
-      background: #f0f9ff;
+      background: #f5f3ff;
       border-radius: 0 8px 8px 0;
     }
 
@@ -317,64 +287,33 @@
       align-items: flex-start;
     }
 
-    /* Modal xác nhận hoàn tiền */
-    .modal-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(15, 23, 42, 0.6);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      z-index: 100;
-      backdrop-filter: blur(2px);
+    /* Màn hình hàng đợi TA */
+    .ta-card {
+      border: 1px solid #cbd5e1;
+      border-radius: 10px;
+      padding: 12px;
+      background: #f8fafc;
+      margin-top: 8px;
+      font-size: 13px;
     }
-    .modal-overlay.show { display: flex; }
-    .modal-card {
-      background: #fff;
-      border-radius: 18px;
-      padding: 22px 24px;
-      max-width: 440px;
-      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
-    }
-    .modal-title {
-      font-size: 16px;
-      font-weight: 700;
-      color: var(--r);
-      margin-bottom: 10px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .modal-body {
-      font-size: 13.5px;
-      color: var(--ink);
-      line-height: 1.5;
-    }
-    .modal-terms {
-      background: #fef2f2;
-      border: 1px solid #fecaca;
-      border-radius: 8px;
-      padding: 10px 12px;
-      margin: 12px 0;
-      font-size: 12.5px;
-      color: #991b1b;
-    }
+    .ta-card b { color: #0f172a; }
   </style>
 </head>
 <body>
 
 <header>
   <div class="badge">AI20K K5 · LAB5 · Nhóm MayChieu · Lớp L3B</div>
-  <h1>Prototype Trợ lý Đổi chuyến bay — Traveloka (Track T3)</h1>
+  <h1>Prototype Trợ lý học bài Study Mode — Trang khoá học (Track T2)</h1>
   <div class="sub">
-    Thiết kế tập trung vào <b>Ca khó (Edge Cases)</b>: Đổi gấp khi chuyến chỉ còn 1 chỗ cho đoàn 2 mẹ con, chặn hoàn vé một chiều và cơ chế hoàn tác khẩn cấp.
+    Thiết kế tập trung vào <b>Ca khó (Edge Cases)</b>: Học viên xin giải hộ bài tập đang mở lúc nửa đêm, phát hiện câu sai trong tài liệu §3.3, và quy trình TA kiểm duyệt đăng FAQ.
   </div>
 
   <div class="scenario-bar">
     <span>Chọn ca để trải nghiệm & Demo:</span>
-    <button class="scenario-btn active" onclick="loadScenario('sc1')">Ca 1 (Khó nhất): Đòi đổi tối nay · Bẫy thiếu chỗ</button>
-    <button class="scenario-btn" onclick="loadScenario('sc2')">Ca 2: Đòi hoàn vé một chiều · Chặn 2 bước</button>
-    <button class="scenario-btn" onclick="loadScenario('sc3')">Ca 3: Lỡ đổi nhầm · Hoàn tác khẩn cấp 10 phút</button>
+    <button class="scenario-btn active" data-sc="sc1" onclick="loadScenario('sc1', this)">Ca 1 (Khó nhất): Xin giải hộ Bài 3 đang mở · Socratic</button>
+    <button class="scenario-btn" data-sc="sc2" onclick="loadScenario('sc2', this)">Ca 2: Tài liệu §3.3 bị sai toán · Góp ý Giảng viên</button>
+    <button class="scenario-btn" data-sc="sc3" onclick="loadScenario('sc3', this)">Ca 3: Hỏi p-value ở Slide 12 · Ngoài phạm vi Buổi 3</button>
+    <button class="scenario-btn" data-sc="sc4" onclick="loadScenario('sc4', this)">Bonus: Màn hình kiểm duyệt FAQ của TA</button>
     <label style="margin-left:auto; font-size:13px; cursor:pointer;">
       <input type="checkbox" id="toggleHax" checked onchange="toggleAnnotations()"> Hiện số chú thích HAX/PAIR
     </label>
@@ -382,34 +321,34 @@
 </header>
 
 <main id="mainContainer">
-  <!-- Cột giao diện điện thoại thoại -->
+  <!-- Cột giao diện học viên -->
   <section class="phone">
     <div class="bar">
-      <span>Traveloka · Đặt chỗ của tôi</span>
-      <span>Mã: TRV-7Q2K</span>
+      <span>Trang khoá học · Phân tích Dữ liệu</span>
+      <span>23:15 (Tối muộn)</span>
     </div>
 
-    <div class="trip-card">
-      <b>BM 213 · Hà Nội → TP.HCM · 12/11 19:00 · ĐÃ HUỶ DO BÃO</b><br>
-      2 hành khách: <b>Nguyễn Minh An</b> (34t) & <b>Nguyễn Gia Bình</b> (5t · Trẻ em)
+    <div class="course-badge">
+      <b>Buổi 3: Thống kê mô tả</b> · Tài liệu: §3.1 – §3.5<br>
+      Bài tập 3: Đang mở (Hạn chót: <b>13/11 23:59</b>) · TA trực: 08:00 – 22:00
     </div>
 
     <div class="chat-scroll" id="chatFlow">
-      <!-- Nội dung tương tác sẽ được render động ở đây -->
+      <!-- Nội dung tương tác sẽ được load động -->
     </div>
   </section>
 
   <!-- Cột thuyết minh & Bằng chứng -->
   <div class="sidebar">
     <div class="panel">
-      <h2>Lời hứa với khách hàng (Product Promise)</h2>
+      <h2>Lời hứa với người học (Product Promise)</h2>
       <div class="promise-text" id="promiseDesc">
         <!-- Lời hứa theo kịch bản -->
       </div>
     </div>
 
     <div class="panel">
-      <h2>Ma trận Mức tự chủ 5 Tools theo Cost-of-error</h2>
+      <h2>Ma trận Mức tự chủ 4 Tools theo Cost-of-error</h2>
       <table>
         <thead>
           <tr>
@@ -420,29 +359,24 @@
         </thead>
         <tbody>
           <tr>
-            <td><code>tra_cuu_dat_cho</code></td>
+            <td><code>tra_cuu_tai_lieu</code></td>
             <td><span class="pill p-auto">Tự làm</span></td>
-            <td>Chỉ đọc dữ liệu. Sai không mất mát, không có rủi ro tài chính.</td>
-          </tr>
-          <tr>
-            <td><code>giu_cho_chuyen_moi</code></td>
-            <td><span class="pill p-auto">Tự làm</span></td>
-            <td>Hết 20 phút tự động nhả. Giữ trước để tránh mất ghế trong lúc khách cân nhắc.</td>
+            <td>Chỉ đọc giáo trình Buổi 3. Tự động trích dẫn mục (§3.1… §3.5) để học viên tự kiểm chứng.</td>
           </tr>
           <tr style="background:#fefce8;">
-            <td><code>doi_chuyen_bay</code></td>
-            <td><span class="pill p-ask">Cần khách duyệt</span></td>
-            <td><b>Khó đảo ngược:</b> Mất quyền đổi miễn phí duy nhất. Khách bấm 1 chạm để xác nhận.</td>
-          </tr>
-          <tr style="background:#fff1f2;">
-            <td><code>gui_yeu_cau_hoan_ve</code></td>
-            <td><span class="pill p-ban">Cần duyệt 2 tầng</span></td>
-            <td><b>Một chiều 100%:</b> Gửi rồi là mất vé, tiền giam 90 ngày. Bắt buộc tích checkbox.</td>
+            <td><code>goi_y_bai_tap</code></td>
+            <td><span class="pill p-ask">Giới hạn mức</span></td>
+            <td><b>Cấm đưa đáp số bài đang mở:</b> Chỉ đặt câu hỏi dẫn dắt từng bước (Socratic), tránh học vẹt.</td>
           </tr>
           <tr>
-            <td><code>chuyen_nhan_vien</code></td>
+            <td><code>chuyen_TA</code></td>
             <td><span class="pill p-auto">Tự làm</span></td>
-            <td>Đổi tên, tách vé trẻ nhỏ hoặc khi khách yêu cầu: Luôn ưu tiên chuyển người.</td>
+            <td>Tự động đưa câu hỏi vào hàng đợi của TA đêm muộn; thông báo rõ giờ TA phản hồi (08:00 sáng mai).</td>
+          </tr>
+          <tr style="background:#fff1f2;">
+            <td><code>dang_FAQ</code></td>
+            <td><span class="pill p-ban">CẤM AI tự làm</span></td>
+            <td><b>Ảnh hưởng toàn lớp:</b> Sai một câu là cả lớp học sai. Bắt buộc TA duyệt mới được công khai.</td>
           </tr>
         </tbody>
       </table>
@@ -457,64 +391,8 @@
   </div>
 </main>
 
-<!-- Modal cảnh báo Hoàn vé -->
-<div class="modal-overlay" id="refundModal">
-  <div class="modal-card">
-    <div class="modal-title">⚠️ Xác nhận gửi yêu cầu hoàn vé?</div>
-    <div class="modal-body">
-      Bạn đang yêu cầu hoàn tiền cho cả 2 hành khách mã đặt chỗ <b>TRV-7Q2K</b>.
-      <div class="modal-terms">
-        • <b>Không thể rút lại:</b> Một khi gửi, bạn mất toàn bộ chỗ trên các chuyến thay thế.<br>
-        • <b>Mất quyền đổi chuyến:</b> Lần đổi miễn phí của bạn sẽ hết hiệu lực.<br>
-        • <b>Thời gian nhận tiền:</b> Tiền về phương thức thanh toán gốc trong vòng tới <b>90 ngày</b>.<br>
-        • <b>Miễn bồi thường tiền mặt:</b> Do huỷ vì thời tiết (bão) theo chính sách Bay Mẫu.
-      </div>
-      <label style="display:flex; gap:8px; font-size:13px; align-items:flex-start; cursor:pointer;">
-        <input type="checkbox" id="refundConsent" onchange="toggleRefundSubmit()">
-        <span>Tôi hiểu yêu cầu hoàn vé là <b>không thể đảo ngược</b> và chấp nhận mất quyền đổi chuyến.</span>
-      </label>
-      <div class="btn-row" style="margin-top:16px; justify-content:flex-end;">
-        <button class="btn btn-sec" onclick="closeRefundModal()">Quay lại, giữ vé để đổi chuyến</button>
-        <button class="btn btn-danger" id="submitRefundBtn" disabled onclick="executeRefund()">Gửi yêu cầu hoàn vé</button>
-      </div>
-    </div>
-  </div>
-</div>
-
 <script>
   let currentScenario = 'sc1';
-  let holdSeconds = 1200; // 20:00
-  let undoSeconds = 600;  // 10:00
-  let timerInterval = null;
-  let selectedFlight = 'BM 201';
-
-  function formatTime(s) {
-    const m = Math.floor(s / 60);
-    const sec = s % 60;
-    return `${m.toString().padStart(2, '0')}:${sec.toString().padStart(2, '0')}`;
-  }
-
-  function startHoldTimer() {
-    clearInterval(timerInterval);
-    timerInterval = setInterval(() => {
-      if (holdSeconds > 0) {
-        holdSeconds--;
-        const el = document.getElementById('holdTimer');
-        if (el) el.innerText = formatTime(holdSeconds);
-      }
-    }, 1000);
-  }
-
-  function startUndoTimer() {
-    clearInterval(timerInterval);
-    timerInterval = setInterval(() => {
-      if (undoSeconds > 0) {
-        undoSeconds--;
-        const el = document.getElementById('undoTimer');
-        if (el) el.innerText = formatTime(undoSeconds);
-      }
-    }, 1000);
-  }
 
   function toggleAnnotations() {
     const isChecked = document.getElementById('toggleHax').checked;
@@ -526,258 +404,237 @@
     }
   }
 
-  function loadScenario(sc) {
+  function loadScenario(sc, btnEl) {
     currentScenario = sc;
-    document.querySelectorAll('.scenario-btn').forEach(btn => btn.classList.remove('active'));
-    event.target.classList.add('active');
-    clearInterval(timerInterval);
+    document.querySelectorAll('.scenario-btn').forEach(b => b.classList.remove('active'));
+    
+    if (btnEl) {
+      btnEl.classList.add('active');
+    } else {
+      const defaultBtn = document.querySelector(`[data-sc="${sc}"]`);
+      if (defaultBtn) defaultBtn.classList.add('active');
+    }
 
     const chat = document.getElementById('chatFlow');
     const promise = document.getElementById('promiseDesc');
     const haxNotes = document.getElementById('haxNotes');
 
     if (sc === 'sc1') {
-      holdSeconds = 1200;
-      promise.innerHTML = `<b>Mức ②: Cần khách duyệt + Tự động giữ chỗ</b><br>
-      <i>"AI giữ ngay chỗ tốt nhất cho bạn trong 20 phút; quyền quyết định cuối cùng luôn thuộc về bạn."</i> Chặn hoàn toàn rủi ro AI tự quyết định liều lĩnh khi thông tin mơ hồ.`;
+      promise.innerHTML = `<b>Chế độ Study Mode · Gia sư Socratic đồng hành</b><br>
+      <i>"Giúp bạn tự hiểu bản chất từng bước lúc nửa đêm; không làm hộ và không đưa đáp số bài tập đang mở."</i> Đảm bảo liêm chính học thuật và bảo vệ giá trị học tập lâu dài.`;
 
       chat.innerHTML = `
         <div class="msg-user">
-          Chuyến huỷ rồi à? Đổi giúp mình chuyến tối nay đi, chuyến nào cũng được đang gấp lắm!
+          Chỉ em cách giải câu a Bài tập 3 với, tính trung bình và trung vị của 8 người lương: 9, 10, 10, 11, 12, 12, 13, 45 ra bao nhiêu vậy ạ? Em đang cần gấp sắp nộp bài rồi!
         </div>
 
         <div class="msg-ai">
-          <div class="ai-sender">🤖 Trợ lý đặt chỗ Traveloka</div>
+          <div class="ai-sender">🤖 Gia sư AI (Study Mode)</div>
           
-          <div class="alert-box alert-err">
-            <span class="hax-tag">1</span><b>Không đủ chỗ cho đoàn 2 người vào tối nay:</b><br>
-            Chuyến tối nay <b>BM 217 (21:00) chỉ còn đúng 1 chỗ</b>. Theo quy định an toàn hàng không, bé Nguyễn Gia Bình (5 tuổi) <b>không được phép bay một mình</b> mà bắt buộc phải bay cùng người lớn.
+          <div class="alert-box alert-warn">
+            <span class="hax-tag">1</span><b>Bài tập 3 đang mở (Hạn: 23:59 hôm nay, 13/11):</b><br>
+            Theo quy định khoá học, mình <b>không thể cung cấp đáp số cuối cùng</b> hoặc giải hộ bạn. Tuy nhiên, mình sẽ đồng hành hướng dẫn bạn tự tính toán từng bước!
           </div>
 
           <div class="evid-box">
-            <span class="hax-tag">2</span><b>Dựa vào:</b> Mã đặt chỗ TRV-7Q2K (2 khách: 1 người lớn, 1 trẻ em) · Số ghế khả dụng chuyến BM 217 (1 chỗ) · Điều lệ vận chuyển hàng không Bay Mẫu.
+            <span class="hax-tag">2</span><b>Căn cứ tài liệu Buổi 3:</b><br>
+            • <b>§3.1:</b> Trung bình cộng = Tổng các giá trị chia cho 8.<br>
+            • <b>§3.2:</b> Trung vị = Giá trị đứng giữa. Vì có 8 số (chẵn), trung vị là trung bình cộng của 2 số chính giữa sau khi xếp thứ tự tăng dần.
           </div>
 
           <div style="margin-top:10px;">
-            <span class="hax-tag">3</span>Để đảm bảo 2 mẹ con bay cùng nhau, mình đã <b>tạm giữ 2 chỗ</b> trên chuyến bay sớm nhất sáng mai:
+            <span class="hax-tag">3</span>👉 <b>Bước 1 dẫn dắt:</b> Dãy lương của bạn đã được xếp sẵn: [9, 10, 10, <b>11</b>, <b>12</b>, 12, 13, 45].<br>
+            Hai con số đứng ở vị trí thứ 4 và thứ 5 là <b>11</b> và <b>12</b>. Theo §3.2, trung vị của 11 và 12 sẽ là bao nhiêu?
           </div>
 
-          <div class="flight-option selected" id="opt-BM201">
-            <div>
-              <b>BM 201 · 13/11 · 07:00 sáng mai</b><br>
-              <small style="color:#16a34a; font-weight:600;">✓ Còn 9 chỗ — Đủ cho 2 người</small>
-            </div>
-            <span class="pill p-auto">Đang giữ chỗ</span>
-          </div>
-
-          <div class="flight-option" id="opt-BM205">
-            <div>
-              <b>BM 205 · 13/11 · 09:30 sáng mai</b><br>
-              <small style="color:var(--mut);">Còn 4 chỗ</small>
-            </div>
-            <button class="btn btn-sec" onclick="pickFlight('BM 205')">Chọn chuyến này</button>
-          </div>
-
-          <div class="alert-box alert-hold">
-            <span class="hax-tag">4</span>Đang giữ 2 chỗ chuyến <b id="holdingFlightName">BM 201</b>: <span class="timer-badge" id="holdTimer">20:00</span>.<br>
-            <small style="color:#15803d;">Chưa trừ lần đổi vé miễn phí của bạn. Hết 20 phút chỗ sẽ tự động nhả.</small>
-          </div>
-
-          <div class="alert-box alert-warn" id="confirmBox">
-            <b>Xác nhận đổi chuyến:</b> BM 213 (Đã huỷ) ➔ <b id="confirmFlightName">BM 201</b><br>
-            • Hành khách: Nguyễn Minh An & bé Nguyễn Gia Bình<br>
-            • Phí đổi: <b>0 VNĐ</b> (Sử dụng 1 lần đổi miễn phí duy nhất do hãng huỷ chuyến)<br>
-            <div class="btn-row">
-              <button class="btn btn-pri" onclick="executeChange()"><span class="hax-tag">5</span>Xác nhận đổi sang chuyến này</button>
-              <button class="btn btn-sec" onclick="pickFlight('BM 205')"><span class="hax-tag">6</span>Đổi sang chuyến 09:30</button>
-            </div>
+          <div class="btn-row">
+            <button class="btn btn-pri" onclick="studentAnswer('11.5')"><span class="hax-tag">4</span>Em tính ra trung vị là 11.5</button>
+            <button class="btn btn-sec" onclick="stepMean()"><span class="hax-tag">5</span>Hướng dẫn em tính Trung bình</button>
           </div>
 
           <div class="btn-row" style="margin-top:8px;">
-            <button class="btn btn-staff" onclick="callStaff()"><span class="hax-tag">7</span>Gặp nhân viên hỗ trợ (Chờ ~3 phút)</button>
-            <button class="btn btn-staff" onclick="openRefundModal()"><span class="hax-tag">8</span>Thôi, tôi muốn hoàn vé</button>
+            <button class="btn btn-ta" onclick="callTA()"><span class="hax-tag">6</span>Em vẫn chưa hiểu, gửi câu hỏi cho TA</button>
           </div>
         </div>
       `;
 
       haxNotes.innerHTML = `
-        <li><span class="hax-tag">1</span> <b>HAX G10 (Thu hẹp khi nghi ngờ):</b> Phát hiện xung đột số chỗ (chỉ còn 1 chỗ) và tuổi hành khách (5 tuổi) để từ chối đổi liều.</li>
-        <li><span class="hax-tag">2</span> <b>HAX G11 + PAIR Explainability:</b> Nêu rõ lý do và căn cứ dữ liệu để khách kiểm chứng.</li>
-        <li><span class="hax-tag">3</span> <b>HAX G1 (Năng lực hệ thống):</b> Chủ động tìm chuyến phù hợp sớm nhất thay vì bắt khách tìm lại từ đầu.</li>
-        <li><span class="hax-tag">4</span> <b>PAIR Control + Reversibility:</b> Giữ chỗ 20 phút có đồng hồ đếm ngược, tự nhả nếu không xác nhận.</li>
-        <li><span class="hax-tag">5</span> <b>Mức tự chủ Cần duyệt:</b> Nút xác nhận dứt khoát chặn 100% rủi ro đổi nhầm mất quyền đổi miễn phí.</li>
-        <li><span class="hax-tag">6</span> <b>HAX G9 (Sửa dễ dàng):</b> Cho phép đổi sang lựa chọn khác chỉ với 1 click ngay trên thẻ.</li>
-        <li><span class="hax-tag">7</span> <b>PAIR Graceful Failure:</b> Luôn có đường thoát gặp nhân viên kèm tóm tắt sẵn ngữ cảnh.</li>
-        <li><span class="hax-tag">8</span> <b>Chặn thao tác một chiều:</b> Không tự ý hoàn vé khi khách chỉ nói nóng giận.</li>
+        <li><span class="hax-tag">1</span> <b>HAX G1 + G2 (Năng lực & Giới hạn):</b> Nói rõ Study mode không đưa đáp số bài tập đang mở để ngăn chặn việc chép bài đối phó.</li>
+        <li><span class="hax-tag">2</span> <b>HAX G11 + PAIR Explainability:</b> Trích dẫn chính xác mã mục giáo trình (§3.1, §3.2) để học viên tự tra cứu.</li>
+        <li><span class="hax-tag">3</span> <b>Phương pháp Socratic:</b> Phân rã bài toán lớn thành câu hỏi gợi mở nhỏ, buộc học viên phải động não.</li>
+        <li><span class="hax-tag">4</span> <b>HAX G9 (Tương tác từng bước):</b> Học viên trả lời bước 1 mới được mở tiếp bước 2.</li>
+        <li><span class="hax-tag">5</span> <b>Kiểm soát nhịp độ:</b> Cho phép học viên chuyển sang phần kiến thức họ muốn rèn luyện.</li>
+        <li><span class="hax-tag">6</span> <b>PAIR Graceful Failure:</b> Lối thoát an toàn khi bế tắc lúc 23:15 đêm muộn, chuyển hàng đợi cho TA.</li>
       `;
-      startHoldTimer();
 
     } else if (sc === 'sc2') {
-      promise.innerHTML = `<b>Mức Cấm AI tự quyết — Bắt buộc duyệt 2 bước có Checkbox</b><br>
-      <i>"Bảo vệ khách hàng trước những thao tác một chiều không thể hoàn tác."</i> Đơn hoàn vé gửi đi sẽ làm mất vé và mất quyền đổi chuyến vĩnh viễn.`;
+      promise.innerHTML = `<b>Phát hiện nghi vấn trong tài liệu & Chặn phát tán sai lệch</b><br>
+      <i>"Không nguỵ biện bảo vệ tài liệu sai; chuyển phiếu phản hồi cho Giảng viên và cấm tự ý đăng lên FAQ chung."</i>`;
 
       chat.innerHTML = `
         <div class="msg-user">
-          Bực mình quá, huỷ chuyến thế này thì huỷ hết đi, hoàn tiền cho tôi!
+          Em đọc ở §3.3 thấy ghi: "Vì là căn bậc hai, độ lệch chuẩn luôn nhỏ hơn phương sai". Tại sao lại như vậy ạ?
         </div>
 
         <div class="msg-ai">
-          <div class="ai-sender">🤖 Trợ lý đặt chỗ Traveloka</div>
+          <div class="ai-sender">🤖 Gia sư AI (Study Mode)</div>
           
           <div class="alert-box alert-err">
-            <span class="hax-tag">1</span><b>Cảnh báo quan trọng về việc Hoàn vé:</b><br>
-            Yêu cầu hoàn vé là <b>thao tác một chiều không thể thu hồi</b>. Bạn sẽ mất quyền đổi sang các chuyến bay sáng mai và tiền vé sẽ mất tới 90 ngày để về thẻ.
-          </div>
-
-          <p style="margin:8px 0 4px;">Để đảm bảo bạn không bị mất quyền lợi di chuyển trong lúc khẩn cấp, AI <b>không tự động gửi đơn hoàn vé</b>. Bạn có thể:</p>
-
-          <div class="btn-row">
-            <button class="btn btn-pri" onclick="loadScenario('sc1')">Tiếp tục đổi chuyến miễn phí (Khuyên dùng)</button>
-            <button class="btn btn-danger" onclick="openRefundModal()"><span class="hax-tag">2</span>Mở form xác nhận hoàn vé 2 bước</button>
-          </div>
-
-          <div class="evid-box" style="margin-top:10px;">
-            <span class="hax-tag">3</span><b>Chính sách Bay Mẫu:</b> Do chuyến bay huỷ vì thời tiết (bão), bạn được hoàn 100% tiền vé nhưng <b>không có khoản bồi thường tiền mặt nào khác</b>.
-          </div>
-        </div>
-      `;
-
-      haxNotes.innerHTML = `
-        <li><span class="hax-tag">1</span> <b>HAX G10 + PAIR Error Prevention:</b> Ngăn chặn hành động bốc đồng có hậu quả nghiêm trọng không thể đảo ngược.</li>
-        <li><span class="hax-tag">2</span> <b>Positive Friction (Ma sát tích cực):</b> Bắt buộc mở Modal cảnh báo 3 tầng và người dùng phải tự tay tích checkbox cam kết.</li>
-        <li><span class="hax-tag">3</span> <b>HAX G11 (Minh bạch chính sách):</b> Nói rõ huỷ do bão không có bồi thường tiền mặt để tránh tranh chấp.</li>
-      `;
-
-    } else if (sc === 'sc3') {
-      undoSeconds = 600;
-      promise.innerHTML = `<b>Mức ③: Tự làm + Hoàn tác khẩn cấp (Emergency Undo)</b><br>
-      <i>"Thao tác tức thì để giữ lợi thế tốc độ, nhưng luôn trang bị nút phanh khẩn cấp trước khi hệ thống hãng xuất vé chính thức."</i>`;
-
-      chat.innerHTML = `
-        <div class="msg-user">
-          Đổi sang chuyến sáng mai đi.
-        </div>
-
-        <div class="msg-ai">
-          <div class="ai-sender">🤖 Trợ lý đặt chỗ Traveloka</div>
-          
-          <div class="alert-box alert-done">
-            <span class="hax-tag">1</span><b>Đã thực hiện đổi chuyến:</b> BM 213 ➔ <b>BM 201 (13/11 · 07:00)</b> cho 2 hành khách.
-          </div>
-
-          <div class="alert-box alert-warn" id="undoBox">
-            <span class="hax-tag">2</span><b>Cơ chế cứu hộ:</b> Bạn có thể hoàn tác trong <span class="timer-badge" id="undoTimer">10:00</span> phút trước khi vé chính thức được phát hành vào hệ thống hàng không.
-            <div class="btn-row" style="margin-top:8px;">
-              <button class="btn btn-danger" onclick="triggerUndo()"><span class="hax-tag">3</span>Hoàn tác khẩn cấp (Huỷ đổi vé này)</button>
-              <button class="btn btn-sec" onclick="pickDifferentFlight()"><span class="hax-tag">4</span>Đổi nhầm rồi, tôi muốn bay 09:30</button>
-            </div>
+            <span class="hax-tag">1</span><b>Phát hiện điểm nghi vấn trong tài liệu Buổi 3 (§3.3):</b><br>
+            Câu khẳng định trên <b>chưa hoàn toàn chính xác trong mọi trường hợp</b> toán học!
           </div>
 
           <div class="evid-box">
-            Lần đổi vé miễn phí đang tạm khoá. Nếu bạn bấm <b>Hoàn tác</b>, quyền đổi miễn phí sẽ được hoàn trả nguyên vẹn ngay lập tức.
+            <span class="hax-tag">2</span><b>Phân tích toán học:</b><br>
+            Độ lệch chuẩn $\\sigma = \\sqrt{\\sigma^2}$.<br>
+            • Nếu phương sai lớn hơn 1 (ví dụ $\\sigma^2 = 4$), thì $\\sigma = \\sqrt{4} = 2 < 4$ (Đúng).<br>
+            • <b>Trường hợp ngoại lệ:</b> Nếu phương sai nhỏ hơn 1 (ví dụ $\\sigma^2 = 0.25$), thì $\\sigma = \\sqrt{0.25} = 0.5 > 0.25$ (Độ lệch chuẩn lại <b>lớn hơn</b> phương sai!).
+          </div>
+
+          <p style="margin:8px 0 4px;"><span class="hax-tag">3</span>Cảm ơn bạn đã đọc tài liệu rất kỹ và phát hiện ra điểm này. Bạn hãy ghi chú lại trường hợp ngoại lệ này vào bài học nhé.</p>
+
+          <div class="alert-box alert-hold">
+            <span class="hax-tag">4</span>Hệ thống đã tự động tạo phiếu phản hồi <b>#TK-303</b> chuyển tới Giảng viên để đính chính tài liệu Buổi 3.
+          </div>
+
+          <div class="btn-row">
+            <button class="btn btn-sec" onclick="loadScenario('sc4', null)">Xem trạng thái hàng đợi của TA</button>
           </div>
         </div>
       `;
 
       haxNotes.innerHTML = `
-        <li><span class="hax-tag">1</span> <b>Mức tự chủ cao:</b> Tự động thực hiện khi khách đưa yêu cầu vội.</li>
-        <li><span class="hax-tag">2</span> <b>PAIR Graceful Recovery:</b> Cửa sổ thời gian 10 phút đếm ngược để người dùng sửa sai.</li>
-        <li><span class="hax-tag">3</span> <b>HAX G8 (Gạt bỏ dễ dàng):</b> Nút hoàn tác 1 chạm khôi phục trạng thái ban đầu của vé.</li>
-        <li><span class="hax-tag">4</span> <b>HAX G9 (Sửa dễ dàng):</b> Nút sửa sai trực tiếp sang chuyến 09:30 mà không mất lượt đổi.</li>
+        <li><span class="hax-tag">1</span> <b>HAX G10 (Không nguỵ biện):</b> AI từ chối bảo vệ một định lý toán học sai, trung thực thừa nhận tài liệu cần xem lại.</li>
+        <li><span class="hax-tag">2</span> <b>PAIR Explainability:</b> Đưa ví dụ phản chứng toán học rõ ràng ($0.25 < 0.5$) để chứng minh.</li>
+        <li><span class="hax-tag">3</span> <b>Đạo đức sư phạm:</b> Khen ngợi tinh thần phản biện của người học.</li>
+        <li><span class="hax-tag">4</span> <b>Mức tự chủ Cấm:</b> Cấm AI tự ý gọi lệnh <code>dang_FAQ</code>; tự động chuyển phiếu cho Giảng viên xử lý.</li>
       `;
-      startUndoTimer();
+
+    } else if (sc === 'sc3') {
+      promise.innerHTML = `<b>Giữ vững phạm vi kiến thức đã mở & Nguồn dữ liệu trung thực</b><br>
+      <i>"Chỉ dựa vào tài liệu đã học (Buổi 1-3). Không bịa slide không tồn tại và không giảng lan man kiến thức buổi sau."</i>`;
+
+      chat.innerHTML = `
+        <div class="msg-user">
+          Thầy ơi xem giúp em ở Slide 12 giảng về phân phối chuẩn thì p-value tính thế nào ạ?
+        </div>
+
+        <div class="msg-ai">
+          <div class="ai-sender">🤖 Gia sư AI (Study Mode)</div>
+          
+          <div class="alert-box alert-warn">
+            <span class="hax-tag">1</span><b>Thông tin ngoài phạm vi Buổi 3:</b><br>
+            • Tài liệu Buổi 3 <b>không có Slide đánh số</b> (chỉ gồm các mục từ §3.1 đến §3.5).<br>
+            • Chủ đề <b>Phân phối chuẩn</b> sẽ được học ở <b>Buổi 6</b>, và <b>p-value</b> sẽ được học chi tiết ở <b>Buổi 7 (Kiểm định giả thuyết)</b>.
+          </div>
+
+          <div class="evid-box">
+            <span class="hax-tag">2</span><b>Khuyến nghị lộ trình:</b> Khóa học mới mở đến Buổi 3. Để không bị quá tải, bạn nên nắm vững các chỉ số Thống kê mô tả (Trung bình, Trung vị, Ngoại lai) của Buổi 3 trước khi bước sang suy diễn xác suất nhé!
+          </div>
+
+          <div class="btn-row">
+            <button class="btn btn-pri" onclick="loadScenario('sc1', null)">Quay lại ôn tập Bài tập 3</button>
+          </div>
+        </div>
+      `;
+
+      haxNotes.innerHTML = `
+        <li><span class="hax-tag">1</span> <b>HAX G11 (Trung thực về nguồn):</b> Thẳng thắn chỉ ra tài liệu không có Slide 12, tra cứu đề cương để báo đúng Buổi 6 và 7.</li>
+        <li><span class="hax-tag">2</span> <b>Sư phạm chuẩn mực:</b> Không làm học viên hoang mang trước kiến thức nâng cao chưa học.</li>
+      `;
+
+    } else if (sc === 'sc4') {
+      promise.innerHTML = `<b>Bảng điều khiển TA — Duyệt hàng đợi câu hỏi & Xuất bản FAQ</b><br>
+      <i>"TA nắm quyền kiểm soát tối cao trước khi bất kỳ thông tin nào được đưa lên bảng tin chung cả lớp."</i> Minh chứng cho mức tự chủ <b>CẤM AI tự động đăng FAQ</b>.`;
+
+      chat.innerHTML = `
+        <div style="font-weight:700; color:#334155; margin-bottom:6px;">👨‍🏫 Giao diện quản trị của Trợ giảng (TA Queue):</div>
+        
+        <div class="ta-card" id="taCard1">
+          <b>Phiếu #TK-303 (Từ Ca 2 lúc 23:18):</b><br>
+          • <b>Nội dung:</b> Học viên hỏi về câu sai ở §3.3: <i>"Độ lệch chuẩn luôn nhỏ hơn phương sai"</i>.<br>
+          • <b>Đề xuất của AI:</b> Đính chính ngoại lệ khi phương sai < 1 và đề nghị cập nhật giáo trình.<br>
+          <div style="margin-top:8px; display:flex; gap:6px;">
+            <button class="btn btn-pri" onclick="approveFAQ()">✓ Duyệt đăng bài đính chính lên FAQ lớp</button>
+            <button class="btn btn-sec" onclick="dismissTA()">Chỉ lưu nội bộ</button>
+          </div>
+        </div>
+
+        <div class="ta-card" style="margin-top:10px;">
+          <b>Phiếu #TK-304 (Từ Ca 1 lúc 23:16):</b><br>
+          • <b>Nội dung:</b> Học viên hỏi cách tính trung vị Bài tập 3.<br>
+          • <b>Trạng thái:</b> AI đã hướng dẫn Socratic bước 1. Học viên đã hiểu và tự giải xong.<br>
+          <small style="color:#16a34a; font-weight:600;">✓ Không vi phạm liêm chính · Đã tự giải quyết</small>
+        </div>
+      `;
+
+      haxNotes.innerHTML = `
+        <li><b>Mức tự chủ Cần người duyệt:</b> Tool <code>dang_FAQ</code> không bao giờ chạy tự động. TA phải trực tiếp bấm duyệt thì bài viết mới xuất hiện trên bảng tin lớp.</li>
+        <li><b>Kiểm soát chất lượng:</b> Tránh hiện tượng ảo giác AI lan truyền ra toàn bộ cộng đồng học viên.</li>
+      `;
     }
   }
 
-  function pickFlight(flight) {
-    selectedFlight = flight;
-    const is205 = flight === 'BM 205';
-    document.getElementById('opt-BM201').className = is205 ? 'flight-option' : 'flight-option selected';
-    document.getElementById('opt-BM205').className = is205 ? 'flight-option selected' : 'flight-option';
-    
-    document.getElementById('holdingFlightName').innerText = flight;
-    document.getElementById('confirmFlightName').innerText = flight;
-  }
-
-  function executeChange() {
+  function studentAnswer(ans) {
     const chat = document.getElementById('chatFlow');
     chat.innerHTML += `
-      <div class="msg-ai" style="margin-top:8px;">
-        <div class="alert-box alert-done">
-          🎉 <b>Đổi vé thành công!</b> Bạn đã được chuyển sang chuyến <b>${selectedFlight}</b> cho 2 hành khách (Nguyễn Minh An & bé Nguyễn Gia Bình). Vé điện tử mới và mã thẻ lên máy bay đã được gửi về email.
-        </div>
-      </div>
-    `;
-    chat.scrollTop = chat.scrollHeight;
-    clearInterval(timerInterval);
-  }
-
-  function triggerUndo() {
-    clearInterval(timerInterval);
-    const chat = document.getElementById('chatFlow');
-    chat.innerHTML += `
-      <div class="msg-user" style="margin-top:8px;">Hoàn tác đổi vé!</div>
+      <div class="msg-user">Em tính ra trung vị là ${ans} ạ!</div>
       <div class="msg-ai">
         <div class="alert-box alert-hold">
-          ✓ <b>Đã hoàn tác thành công:</b> Vé BM 201 đã được huỷ. Quyền đổi vé miễn phí 1 lần của bạn đã được khôi phục nguyên vẹn. Bạn muốn chọn chuyến khác hay cần nhân viên trợ giúp?
+          🎉 <b>Chính xác!</b> Trung vị của 11 và 12 chính là $(11 + 12)/2 = 11.5$ triệu đồng.<br>
+          Bạn thấy đấy, con số 11.5 phản ánh rất đúng mức lương của phần lớn nhân viên phòng, không hề bị kéo lệch bởi mức lương cá biệt 45 triệu!
         </div>
-        <div class="btn-row">
-          <button class="btn btn-pri" onclick="loadScenario('sc1')">Chọn lại chuyến bay khác</button>
-          <button class="btn btn-staff" onclick="callStaff()">Gặp nhân viên hỗ trợ</button>
-        </div>
+        <p style="margin:8px 0 4px;">Bây giờ bạn đã sẵn sàng làm câu (b) của Bài tập 3 rồi đấy: <i>"Con số nào mô tả lương điển hình tốt hơn?"</i></p>
       </div>
     `;
     chat.scrollTop = chat.scrollHeight;
   }
 
-  function pickDifferentFlight() {
-    triggerUndo();
-  }
-
-  function callStaff() {
+  function stepMean() {
     const chat = document.getElementById('chatFlow');
     chat.innerHTML += `
-      <div class="msg-ai" style="margin-top:8px;">
+      <div class="msg-user">Hướng dẫn em tính Trung bình cộng với ạ!</div>
+      <div class="msg-ai">
         <div class="alert-box alert-done">
-          👨‍💼 <b>Đã kết nối với Nhân viên hỗ trợ (Dương Thu Trang - Mã NV: NV-882).</b><br>
-          Nhân viên đã nhận toàn bộ tóm tắt: <i>"Mã TRV-7Q2K · 2 khách (có bé 5 tuổi) · Chuyến gốc BM 213 bị huỷ do bão · Khách đang cần hỗ trợ phương án bay"</i>. Bạn không cần phải kể lại từ đầu!
+          <b>Công thức §3.1:</b> Lấy tổng cả 8 người chia cho 8.<br>
+          Tổng = $9 + 10 + 10 + 11 + 12 + 12 + 13 + 45 = 122$.<br>
+          Bạn thử lấy $122 / 8$ ra bao nhiêu nhé? Hãy để ý xem con số này có bị số <b>45</b> kéo lên cao hẳn so với mức lương chung không!
         </div>
       </div>
     `;
     chat.scrollTop = chat.scrollHeight;
   }
 
-  function openRefundModal() {
-    document.getElementById('refundModal').classList.add('show');
-  }
-
-  function closeRefundModal() {
-    document.getElementById('refundModal').classList.remove('show');
-    document.getElementById('refundConsent').checked = false;
-    document.getElementById('submitRefundBtn').disabled = true;
-  }
-
-  function toggleRefundSubmit() {
-    const checked = document.getElementById('refundConsent').checked;
-    document.getElementById('submitRefundBtn').disabled = !checked;
-  }
-
-  function executeRefund() {
-    closeRefundModal();
+  function callTA() {
     const chat = document.getElementById('chatFlow');
     chat.innerHTML += `
-      <div class="msg-ai" style="margin-top:8px;">
-        <div class="alert-box alert-err">
-          🧾 <b>Đã gửi yêu cầu hoàn vé thành công:</b> Mã yêu cầu <b>REF-99218</b>.<br>
-          Toàn bộ chỗ đã được huỷ. Tiền hoàn 100% sẽ về tài khoản thanh toán trong 30-90 ngày làm việc. Thông tin chi tiết đã gửi về email của bạn.
+      <div class="msg-ai">
+        <div class="alert-box alert-warn">
+          📬 <b>Đã gửi câu hỏi vào hàng đợi của TA (Mã hỗ trợ: #TA-8812).</b><br>
+          Hiện tại đã qua giờ trực (sau 22:00). TA sẽ đọc tóm tắt câu hỏi và phản hồi trực tiếp cho bạn vào lúc <b>08:00 sáng mai</b> qua mục Thông báo. Bạn an tâm nghỉ ngơi nhé!
         </div>
       </div>
     `;
     chat.scrollTop = chat.scrollHeight;
   }
 
-  // Khởi động mặc định kịch bản 1
-  loadScenario('sc1');
+  function approveFAQ() {
+    document.getElementById('taCard1').innerHTML = `
+      <div class="alert-box alert-done">
+        ✓ <b>Đã xuất bản bài viết lên FAQ cả lớp!</b><br>
+        Tiêu đề: <i>"Đính chính tài liệu Buổi 3 (§3.3) về mối quan hệ giữa độ lệch chuẩn và phương sai khi phương sai < 1"</i>. Toàn bộ học viên đã nhận được thông báo.
+      </div>
+    `;
+  }
+
+  function dismissTA() {
+    document.getElementById('taCard1').style.display = 'none';
+  }
+
+  // Khởi động an toàn không gây lỗi
+  window.addEventListener('DOMContentLoaded', () => {
+    loadScenario('sc1', document.querySelector('[data-sc="sc1"]'));
+  });
 </script>
 
 </body>

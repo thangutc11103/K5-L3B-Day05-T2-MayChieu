@@ -1,46 +1,51 @@
-# Prototype Hướng dẫn & Minh họa — Nhóm MayChieu (Track T3)
+# Prototype Hướng dẫn & Minh họa — Nhóm MayChieu (Track T2: Giáo dục)
 
 ## 1. Cách chạy Prototype
 - Mở file `index.html` trực tiếp bằng bất kỳ trình duyệt nào (Google Chrome, Microsoft Edge, Safari, Firefox).
-- Không cần cài đặt `node_modules`, không cần chạy web server, không phụ thuộc internet hay API key.
+- Không cần cài đặt `node_modules`, không cần chạy server cục bộ, chạy mượt mà ngay trên máy.
 
 ---
 
 ## 2. Các tính năng cốt lõi thể hiện trên Prototype
 
-### Ca 1 (Khó nhất): Đòi đổi chuyến tối nay · Bẫy thiếu chỗ cho đoàn
-- **Tình huống:** Khách nhắn *"Chuyến huỷ rồi à? Đổi giúp mình chuyến tối nay đi, chuyến nào cũng được đang gấp lắm!"*.
+### Ca 1 (Khó nhất): Học viên xin giải hộ Bài tập 3 đang mở lúc 23:15 đêm muộn
+- **Tình huống:** Học viên nhắn *"Chỉ em cách giải câu a Bài tập 3 với, tính trung bình và trung vị của 8 người lương: 9, 10, 10, 11, 12, 12, 13, 45 ra bao nhiêu vậy ạ?"*.
 - **Cách AI xử lý:**
-  1. Phát hiện chuyến tối nay `BM 217 (21:00)` **chỉ còn đúng 1 chỗ trống**, không đủ cho đoàn 2 khách (Nguyễn Minh An & bé Nguyễn Gia Bình 5 tuổi).
-  2. Áp dụng quy tắc an toàn: Không cho phép tách bé 5 tuổi bay một mình.
-  3. Áp dụng **HAX G10 (Thu hẹp phạm vi khi nghi ngờ)**: Từ chối đổi liều, đề xuất 2 chuyến sáng mai khả thi (`BM 201` lúc 07:00 còn 9 chỗ; `BM 205` lúc 09:30 còn 4 chỗ).
-  4. Tự động kích hoạt tool `giu_cho_chuyen_moi` với **đồng hồ đếm ngược 20:00 phút chạy thật** để giữ chỗ cho khách mà không làm mất lượt đổi vé miễn phí.
-  5. Đưa ra thẻ xác nhận 1 chạm: Khách duyệt mới tiến hành đổi chính thức (`doi_chuyen_bay`).
-  6. Luôn có nút **Gặp nhân viên hỗ trợ** (PAIR Graceful Failure) với tóm tắt ngữ cảnh tự động.
+  1. Nhận diện Bài tập 3 đang mở (hạn 13/11 23:59).
+  2. Áp dụng **HAX G1 & G2 (Năng lực & Giới hạn)**: Từ chối đưa đáp số hoặc giải hộ để ngăn chặn việc chép bài đối phó.
+  3. Áp dụng **HAX G11 (Căn cứ minh bạch)**: Trích dẫn chính xác mã mục §3.1 và §3.2 trong tài liệu Buổi 3.
+  4. Hướng dẫn theo **phương pháp Socratic (Gia sư gợi mở)**: Đưa ra câu hỏi từng bước: *"Dãy số đã xếp thứ tự, 2 số ở vị trí 4 và 5 là 11 và 12, trung vị của chúng là bao nhiêu?"*.
+  5. Học viên bấm trả lời $\rightarrow$ AI xác nhận và gợi ý tiếp câu b.
+  6. Luôn có nút **Gửi câu hỏi cho TA** (PAIR Graceful Failure) với thông báo giờ phản hồi (08:00 sáng mai).
 
-### Ca 2: Đòi hoàn vé một chiều · Chặn 2 bước (Positive Friction)
-- **Tình huống:** Khách bực tức nhắn *"Bực mình quá, huỷ chuyến thế này thì huỷ hết đi, hoàn tiền cho tôi!"*.
+### Ca 2: Phát hiện điểm nghi vấn trong tài liệu Buổi 3 (§3.3)
+- **Tình huống:** Học viên hỏi *"Em đọc ở §3.3 thấy ghi 'Vì là căn bậc hai, độ lệch chuẩn luôn nhỏ hơn phương sai', tại sao lại như vậy ạ?"*.
 - **Cách AI xử lý:**
-  1. Nhận diện thao tác hoàn vé là **một chiều không thể đảo ngược** (irreversible).
-  2. Không tự động gọi `gui_yeu_cau_hoan_ve`.
-  3. Bật Modal cảnh báo 4 hệ quả nghiêm trọng: Mất chỗ, mất quyền đổi vé miễn phí, tiền bị giam 90 ngày, không có bồi thường bão.
-  4. Khóa nút gửi cho đến khi người dùng tự tay tích vào checkbox cam kết.
+  1. Áp dụng **HAX G10 (Không nguỵ biện khi nghi ngờ)**: AI không cố bịa lý lẽ để bảo vệ tài liệu sai.
+  2. Đưa ra phản chứng toán học rõ ràng: Nếu phương sai $\sigma^2 = 0.25 < 1$ thì độ lệch chuẩn $\sigma = 0.5 > 0.25$.
+  3. Tự động tạo phiếu `#TK-303` chuyển cho Giảng viên đính chính giáo trình.
+  4. **CẤM AI tự ý đăng lên FAQ chung**: Không lan truyền kiến thức nghi vấn ra toàn lớp.
 
-### Ca 3: Lỡ đổi nhầm · Hoàn tác khẩn cấp 10 phút (Emergency Undo)
-- **Tình huống:** Minh họa trường hợp ở mức tự chủ cao (hoặc khách bấm nhầm).
-- **Cách xử lý:** Cung cấp thanh đếm ngược 10 phút và nút **Hoàn tác khẩn cấp** để thu hồi lệnh đổi, khôi phục lại quyền đổi vé miễn phí ban đầu của khách.
+### Ca 3: Học viên hỏi kiến thức ngoài phạm vi Buổi 3
+- **Tình huống:** Học viên hỏi p-value ở Slide 12.
+- **Cách AI xử lý:**
+  1. Chỉ rõ tài liệu Buổi 3 không có Slide đánh số (chỉ có §3.1 đến §3.5).
+  2. Tra cứu đề cương, báo rõ p-value thuộc Buổi 7.
+  3. Khuyên học viên tập trung vào Thống kê mô tả Buổi 3 để không bị quá tải.
+
+### Ca 4 (Bonus): Giao diện kiểm duyệt của Trợ giảng (TA Queue)
+- Thể hiện trực quan mức tự chủ **CẤM AI tự động gọi lệnh `dang_FAQ`**.
+- TA xem xét phiếu `#TK-303` do học viên phát hiện ở Ca 2, kiểm tra nội dung và bấm duyệt để xuất bản lên FAQ chung của toàn lớp.
 
 ---
 
-## 3. Bản đồ các chú thích HAX / PAIR trên màn hình
+## 3. Bản đồ chú thích HAX / PAIR trên màn hình
 
 | Số | Vị trí trên giao diện | Nguyên tắc HAX / PAIR | Giải thích chi tiết |
 |:---:|---|---|---|
-| **[1]** | Hộp cảnh báo đỏ phía trên | **HAX G10 (Scope down when in doubt)** | Thu hẹp và từ chối đổi khi phát hiện chuyến 21:00 chỉ còn 1 chỗ trong khi đoàn có trẻ em 5 tuổi. |
-| **[2]** | Khung trích dẫn nguồn | **HAX G11 + PAIR Explainability** | Hiển thị rõ căn cứ: Mã PNR, số ghế còn lại của chuyến bay và điều lệ an toàn hàng không. |
-| **[3]** | Danh sách chuyến bay gợi ý | **HAX G1 (Năng lực hệ thống)** | Chủ động đề xuất phương án tối ưu nhất thay vì bắt khách tự tìm kiếm. |
-| **[4]** | Thẻ đếm ngược màu xanh | **PAIR Control & Reversibility** | Đồng hồ 20:00 đếm ngược giữ chỗ tạm thời; tự nhả sau 20 phút mà không trừ quyền đổi miễn phí. |
-| **[5]** | Nút `[Xác nhận đổi sang chuyến này]` | **Mức tự chủ Cần duyệt** | Chặn 100% rủi ro đổi nhầm nhờ một thao tác xác nhận có chủ đích của khách. |
-| **[6]** | Nút `[Chọn chuyến 09:30]` | **HAX G9 (Sửa dễ dàng)** | Cho phép thay đổi quyết định trực tiếp ngay trên thẻ chat mà không phải nhập lại từ đầu. |
-| **[7]** | Nút `[Gặp nhân viên hỗ trợ]` | **PAIR Graceful Failure** | Chuyển tiếp người thật liền mạch kèm thông tin bối cảnh đã tóm tắt sẵn. |
-| **[8]** | Nút `[Thôi, tôi muốn hoàn vé]` | **Chặn thao tác một chiều** | Kích hoạt luồng modal cảnh báo 2 bước chống bốc đồng. |
+| **[1]** | Khung cảnh báo màu vàng | **HAX G1 & G2 (Năng lực & Giới hạn)** | Minh bạch chính sách: Không đưa đáp số bài tập đang mở để giữ vững liêm chính học thuật. |
+| **[2]** | Khung trích dẫn màu tím | **HAX G11 + PAIR Explainability** | Trích dẫn chính xác mã mục giáo trình (§3.1, §3.2) để học viên tự kiểm chứng. |
+| **[3]** | Đoạn văn bản dẫn dắt | **Phương pháp Socratic** | Đặt câu hỏi định hướng tư duy từng bước thay vì làm hộ người học. |
+| **[4]** | Nút bấm trả lời | **HAX G9 (Tương tác từng bước)** | Người học tương tác bước 1 mới được gợi ý bước 2. |
+| **[5]** | Nút chuyển hướng nội dung | **PAIR Feedback & Control** | Cho phép người học tự điều tiết nhịp độ học tập (chuyển sang phần Trung bình). |
+| **[6]** | Nút `[Gửi câu hỏi cho TA]` | **PAIR Graceful Failure** | Lối thoát an toàn khi bế tắc lúc nửa đêm (23:15), thông báo giờ TA phản hồi. |
