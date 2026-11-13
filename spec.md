@@ -4,11 +4,17 @@
 
 **Lớp:** L3B · **Bàn / zone:** Zone B · **Track:** T2 — Giáo dục (ChatGPT Study mode tích hợp vào trang khoá học)
 
-| Họ và Tên | Mã Học Viên | Việc đã làm |
+| Họ và Tên | Mã Học Viên | Việc đã làm & Phân vai quy trình |
 |---|---|---|
-| Nguyễn Đức Thắng | 2A202603798 | Xác định lát cắt & phạm vi (§1); xây dựng bảng 8 kịch bản rủi ro bao phủ đủ 4 lớp, lập luận chọn 2 kịch bản đắt nhất (§2); trình bày phần kịch bản khi demo |
-| Lê Đức Trúc Lâm | 2A202603787 | Thiết kế UX khi AI sai theo HAX/PAIR (§3); xây dựng ma trận mức tự chủ cho 4 tools theo cost-of-error, phân tích tool khó xếp nhất (§4); giải thích mức tự chủ khi demo |
-| Hoàng Dương Anh Quân | 2A202603735 | Xây dựng prototype tương tác HTML màn hình học viên & hàng đợi TA (§5); xây dựng bộ tiêu chí nghiệm thu (§6); trực tiếp thao tác prototype khi demo |
+| **Nguyễn Đức Thắng** | 2A202603798 | **Product & Risk Lead:** Xác định lát cắt & phạm vi (§1); xây dựng bảng 8 kịch bản rủi ro bao phủ đủ 4 lớp, lập luận chọn 2 kịch bản đắt nhất (§2); phụ trách mốc M1; thuyết trình bối cảnh & kịch bản khi demo (1.5 phút đầu) |
+| **Lê Đức Trúc Lâm** | 2A202603787 | **AI UX & Autonomy Architect:** Thiết kế UX khi AI sai theo HAX/PAIR (§3); xây dựng ma trận mức tự chủ cho 4 tools theo cost-of-error, phân tích tool khó xếp nhất `dang_FAQ` (§4); phụ trách mốc M2; giải thích mức tự chủ khi demo (1.5 phút tiếp) |
+| **Hoàng Dương Anh Quân** | 2A202603735 | **Prototyper & QA Lead:** Xây dựng prototype tương tác HTML màn hình học viên & hàng đợi TA (§5); xây dựng bộ tiêu chí nghiệm thu (§6); phụ trách mốc M3; trực tiếp thao tác demo prototype & điều phối xử lý ca lạ |
+
+> **Quy trình phối hợp 240 phút:**  
+> - **Giai đoạn 1 (0' - 45' · Mốc M1):** Thắng chủ trì hoàn thiện bảng 8 kịch bản rủi ro phủ 4 lớp; Lâm rà soát các điểm nghi vấn trong tài liệu §3.3; Quân khởi tạo và kiểm thử khung giao diện.  
+> - **Giai đoạn 2 (45' - 100' · Mốc M2):** Lâm chủ trì phân loại ma trận 4 tools theo cost-of-error và bảo vệ phương án cấm AI tự động `dang_FAQ`; Thắng soạn thảo câu hỏi Socratic cho Bài tập 3; Quân gắn các nút bấm và trạng thái tương ứng.  
+> - **Giai đoạn 3 (100' - 180' · Mốc M3):** Quân hoàn thiện toàn bộ luồng tương tác trên `prototype/index.html`; Thắng & Lâm hoàn thiện 3 tiêu chí nghiệm thu Pass/Fail và rà soát rubric 100 điểm.  
+> - **Giai đoạn 4 (180' - 240' · Demo):** Cả 3 thành viên tổng duyệt kịch bản demo 4 phút và tập dượt phương án phản ứng trước các "ca lạ" từ Hội đồng.
 
 ---
 
